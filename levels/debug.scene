@@ -3,7 +3,6 @@
     {
       "Id": "f5c2e472-6f93-4928-b08c-921fef2d0857",
       "Name": "Plane",
-      "Position": "-303.687,-275.5767,473.8987",
       "Scale": "100,100,100",
       "Enabled": true,
       "Components": [
@@ -21,7 +20,34 @@
           "__type": "ColliderBoxComponent",
           "__enabled": true,
           "IsTrigger": false,
-          "Scale": "100,100,0.1",
+          "Scale": "100,100,0.01",
+          "Static": true,
+          "Surface": null
+        }
+      ]
+    },
+    {
+      "Id": "95d08f37-e2d0-48aa-bf75-23bb25fd09cd",
+      "Name": "Plane (1)",
+      "Position": "-303.687,-275.5767,421.5985",
+      "Scale": "100,100,100",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "__enabled": false,
+          "BodyGroups": 18446744073709551615,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/dev/plane.vmdl",
+          "ShouldCastShadows": true,
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "ColliderBoxComponent",
+          "__enabled": true,
+          "IsTrigger": false,
+          "Scale": "100,100,1",
           "Static": true,
           "Surface": null
         }
@@ -31,7 +57,7 @@
       "Id": "7150f631-3a72-42fc-80bc-c2c9a3ee3c63",
       "Name": "Sun",
       "Position": "-310.0077,-298.0988,651.3469",
-      "Rotation": "-0.00000002167419,0.3636324,0.0000000000000003385185,0.9315425",
+      "Rotation": "-0.3632447,-0.01679417,0.9305487,-0.04302267",
       "Enabled": true,
       "Components": [
         {
@@ -46,10 +72,50 @@
     {
       "Id": "0167bb51-4996-4b05-afe6-58add9ecb82d",
       "Name": "player",
-      "Position": "3.488708,-493.5013,542.8987",
-      "Rotation": "0,0,0.707107,0.7071065",
+      "Position": "453.0304,-151.6942,0",
+      "Rotation": "0.00000002868845,0.00000002978154,1,-0.0000006397578",
       "Enabled": true,
       "__Prefab": "prefabs/player.prefab"
+    },
+    {
+      "Id": "749fcebb-fdd0-4cac-955a-e80ffab05b81",
+      "Name": "snot",
+      "Position": "134.7045,-222.438,0",
+      "Scale": "2,2,2",
+      "Enabled": true,
+      "__Prefab": "prefabs/snot.prefab"
+    },
+    {
+      "Id": "1b72a24f-58ed-441f-9932-7de44c52526c",
+      "Name": "snot (1)",
+      "Position": "-33.8075,-173.6241,-0.0000100441",
+      "Scale": "2,2,2",
+      "Enabled": true,
+      "__Prefab": "prefabs/snot.prefab"
+    },
+    {
+      "Id": "a60ffe2a-fa64-438e-9c2a-d384634b0d33",
+      "Name": "snot (2)",
+      "Position": "98.27651,-104.4023,-0.000002171277",
+      "Scale": "2,2,2",
+      "Enabled": true,
+      "__Prefab": "prefabs/snot.prefab"
+    },
+    {
+      "Id": "23f98181-16b1-4647-b5c3-fea7c5977506",
+      "Name": "snot (3)",
+      "Position": "-46.08468,-25.5267,-0.00001077587",
+      "Scale": "2,2,2",
+      "Enabled": true,
+      "__Prefab": "prefabs/snot.prefab"
+    },
+    {
+      "Id": "db14c9e3-ded1-4431-ac7e-c69470c9b344",
+      "Name": "snot (4)",
+      "Position": "184.1413,-7.097426,0.000002946662",
+      "Scale": "2,2,2",
+      "Enabled": true,
+      "__Prefab": "prefabs/snot.prefab"
     }
   ],
   "SceneProperties": {

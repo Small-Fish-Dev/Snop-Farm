@@ -20,7 +20,7 @@ public class ThirdPersonController : Component
 
 	[Range( 0f, 600f, 1f, true, true )]
 	[Property]
-	public float JumpStrength { get; set; } = 300f; // How high we jump
+	public float JumpStrength { get; set; } = 400f; // How high we jump
 
 	[Property]
 	public bool CapsuleCollisions { get; set; } = true; // Capsule or BBox

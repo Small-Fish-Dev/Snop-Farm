@@ -16,7 +16,7 @@
         "Deceleration": 10,
         "GroundAngle": 45,
         "IgnoreLayers": "",
-        "JumpStrength": 350,
+        "JumpStrength": 400,
         "RunSpeed": 250,
         "StepHeight": 18,
         "WalkSpeed": 120
