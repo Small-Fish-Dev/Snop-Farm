@@ -294,7 +294,10 @@ public class ThirdPersonController : Component
 		ComputeHelper();
 		ComputeJump();
 
-		Transform.Rotation = Rotation.Slerp( Transform.Rotation, Rotation.FromYaw( EyeAngles.yaw ), Time.Delta * 10f );
+		var bodyHeadRotationDifference = Vector3.GetAngle( Transform.Rotation.Forward.WithZ( 0 ), EyeAngles.Forward.WithZ( 0 ) );
+
+		if ( !Velocity.IsNearlyZero( 1f ) || bodyHeadRotationDifference > 50f )
+			Transform.Rotation = Rotation.Slerp( Transform.Rotation, Rotation.FromYaw( EyeAngles.yaw ), Time.Delta * 6f );
 
 		if ( CitizenAnimation != null )
 		{
