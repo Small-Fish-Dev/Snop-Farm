@@ -1,0 +1,82 @@
+{
+  "RootObject": {
+    "Id": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+    "Name": "player",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ThirdPersonController",
+        "__enabled": true,
+        "Acceleration": 10,
+        "Camera": "a144f09e-75c6-4b72-9767-47407c9840f0",
+        "CapsuleCollisions": true,
+        "CitizenAnimation": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+        "CollisionHeight": 72,
+        "CollisionRadius": 12,
+        "Deceleration": 10,
+        "GroundAngle": 45,
+        "IgnoreLayers": "",
+        "JumpStrength": 350,
+        "RunSpeed": 250,
+        "StepHeight": 18,
+        "WalkSpeed": 120
+      },
+      {
+        "__type": "SkinnedModelRenderer",
+        "__enabled": true,
+        "BodyGroups": 18446744073709551615,
+        "BoneMergeTarget": null,
+        "CreateBoneObjects": false,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/citizen/citizen.vmdl",
+        "ShouldCastShadows": true,
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "CitizenAnimation",
+        "__enabled": true,
+        "EyeSource": "899c8a95-9d64-4d81-9ad7-6a00c3b66d4d",
+        "Height": 1,
+        "IkLeftFoot": null,
+        "IkLeftHand": null,
+        "IkRightFoot": null,
+        "IkRightHand": null,
+        "LookAtObject": "899c8a95-9d64-4d81-9ad7-6a00c3b66d4d",
+        "Target": "35c2419c-d094-4be5-b8a4-8b3916c19fdf"
+      }
+    ],
+    "Children": [
+      {
+        "Id": "a144f09e-75c6-4b72-9767-47407c9840f0",
+        "Name": "Camera",
+        "Position": "-200,-0.00000421721,64",
+        "Tags": "maincamera",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "CameraComponent",
+            "__enabled": true,
+            "BackgroundColor": "0.33333,0.46275,0.52157,1",
+            "ClearFlags": "All",
+            "FieldOfView": 60,
+            "IsMainCamera": true,
+            "Orthographic": false,
+            "OrthographicHeight": 1204,
+            "Priority": 1,
+            "RenderExcludeTags": "",
+            "RenderTags": "",
+            "TargetEye": "None",
+            "Viewport": "0,0,1,1",
+            "ZFar": 10000,
+            "ZNear": 10
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
