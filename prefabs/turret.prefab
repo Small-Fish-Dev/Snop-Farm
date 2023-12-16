@@ -1,0 +1,42 @@
+{
+  "RootObject": {
+    "Id": "69e23b31-dfcf-453d-aea5-2bc4d87be93b",
+    "Name": "turret",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "__enabled": true,
+        "BodyGroups": 18446744073709551615,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/pistol.vmdl",
+        "ShouldCastShadows": true,
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "UnitInfo",
+        "__enabled": true,
+        "EnemyUnitTypes": [
+          "Slime"
+        ],
+        "Health": 5,
+        "UnitType": "Turret"
+      },
+      {
+        "__type": "ColliderBoxComponent",
+        "__enabled": true,
+        "IsTrigger": false,
+        "Scale": "50,50,50",
+        "Static": false,
+        "Surface": null
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": [
+    "rifter.ctd_pistol"
+  ]
+}

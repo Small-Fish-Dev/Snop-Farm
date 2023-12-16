@@ -36,14 +36,23 @@
       {
         "__type": "CitizenAnimation",
         "__enabled": true,
-        "EyeSource": "899c8a95-9d64-4d81-9ad7-6a00c3b66d4d",
+        "EyeSource": null,
         "Height": 1,
         "IkLeftFoot": null,
         "IkLeftHand": null,
         "IkRightFoot": null,
         "IkRightHand": null,
-        "LookAtObject": "899c8a95-9d64-4d81-9ad7-6a00c3b66d4d",
+        "LookAtObject": null,
         "Target": "35c2419c-d094-4be5-b8a4-8b3916c19fdf"
+      },
+      {
+        "__type": "UnitInfo",
+        "__enabled": true,
+        "EnemyUnitTypes": [
+          "Slime"
+        ],
+        "Health": 10,
+        "UnitType": "None"
       }
     ],
     "Children": [

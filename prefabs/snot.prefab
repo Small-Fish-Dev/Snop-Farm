@@ -24,6 +24,17 @@
         "Radius": 25,
         "Static": true,
         "Surface": null
+      },
+      {
+        "__type": "UnitInfo",
+        "__enabled": true,
+        "EnemyUnitTypes": [
+          "Player",
+          "Turret",
+          "NPC"
+        ],
+        "Health": 2,
+        "UnitType": "Slime"
       }
     ]
   },

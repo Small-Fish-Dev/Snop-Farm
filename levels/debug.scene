@@ -116,6 +116,14 @@
       "Scale": "2,2,2",
       "Enabled": true,
       "__Prefab": "prefabs/snot.prefab"
+    },
+    {
+      "Id": "69e23b31-dfcf-453d-aea5-2bc4d87be93b",
+      "Name": "Turret",
+      "Position": "354.5221,-139.4513,0.000122457",
+      "Rotation": "0.00000005958913,0.000000000000004425688,0.9997396,0.02280291",
+      "Enabled": true,
+      "__Prefab": "prefabs/turret.prefab"
     }
   ],
   "SceneProperties": {
