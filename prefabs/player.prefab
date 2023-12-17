@@ -34,15 +34,19 @@
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "CitizenAnimation",
+        "__type": "CitizenAnimationHelper",
         "__enabled": true,
+        "BodyWeight": 1,
         "EyeSource": null,
+        "EyesWeight": 1,
+        "HeadWeight": 1,
         "Height": 1,
         "IkLeftFoot": null,
         "IkLeftHand": null,
         "IkRightFoot": null,
         "IkRightHand": null,
-        "LookAtObject": null,
+        "LookAt": null,
+        "LookAtEnabled": false,
         "Target": "35c2419c-d094-4be5-b8a4-8b3916c19fdf"
       },
       {

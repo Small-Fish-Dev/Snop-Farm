@@ -1,4 +1,6 @@
 
+using Sandbox.Citizen;
+
 [Title( "Third Person Controller" )]
 [Category( "Physics" )]
 [Icon( "directions_walk" )]
@@ -8,7 +10,7 @@ public class ThirdPersonController : Component
 	[Property]
 	public GameObject Camera { get; set; }
 	[Property]
-	public CitizenAnimation CitizenAnimation { get; set; }
+	public CitizenAnimationHelper CitizenAnimation { get; set; }
 
 	[Range( 0f, 400f, 1f, true, true )]
 	[Property]
