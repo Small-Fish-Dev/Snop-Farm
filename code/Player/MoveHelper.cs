@@ -58,6 +58,13 @@ public class MoveHelper : Component
 	public Vector3 Gravity { get; set; } = new Vector3( 0f, 0f, 850f );
 
 	[Property]
+	public bool EnableUnstuck { get; set; } = true;
+
+	[Range( 1, 100, 1, true, true )]
+	[Property]
+	public int MaxUnstuckTries { get; set; } = 20;
+
+	[Property]
 	public TagSet IgnoreLayers { get; set; } = new TagSet();
 
 	public BBox CollisionBBox;
@@ -213,7 +220,7 @@ public class MoveHelper : Component
 	//     Move a character, with this velocity
 	public void Move()
 	{
-		if ( !TryUnstuck() )
+		if ( !EnableUnstuck || !TryUnstuck() )
 		{
 			if ( IsOnGround )
 				Move( step: true );
@@ -230,7 +237,7 @@ public class MoveHelper : Component
 	//     sliding. This is good for different control modes like ladders and stuff.
 	public void MoveTo( Vector3 targetPosition, bool useStep )
 	{
-		if ( !TryUnstuck() )
+		if ( !EnableUnstuck || !TryUnstuck() )
 		{
 			Vector3 position = base.Transform.Position;
 			Vector3 velocity = targetPosition - position;
@@ -254,7 +261,7 @@ public class MoveHelper : Component
 			return false;
 		}
 
-		int num = 20;
+		int num = MaxUnstuckTries;
 		for ( int i = 0; i < num; i++ )
 		{
 			Vector3 vector = base.Transform.Position + Vector3.Random.Normal * ((float)_stuckTries / 2f);
