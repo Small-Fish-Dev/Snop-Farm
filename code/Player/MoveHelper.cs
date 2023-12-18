@@ -72,7 +72,7 @@ public class MoveHelper : Component
 
 	public Vector3 InitialCameraPosition { get; private set; }
 	public Angles EyeAngles { get; private set; }
-	public Vector3 WishVelocity { get; private set; }
+	public Vector3 WishVelocity { get; set; }
 	public Vector3 Velocity { get; set; }
 	public bool IsOnGround { get; set; }
 	public bool IsCapsuleCollider => UseCollider ? Collider is CapsuleCollider : UseCapsule;

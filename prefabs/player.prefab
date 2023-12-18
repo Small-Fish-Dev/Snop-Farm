@@ -51,10 +51,12 @@
         "CollisionHeight": 72,
         "CollisionRadius": 16,
         "Deceleration": 10,
+        "EnableUnstuck": true,
         "Gravity": "0,0,850",
         "GroundAngle": 45,
         "GroundFriction": 4,
-        "IgnoreLayers": "",
+        "IgnoreLayers": "player",
+        "MaxUnstuckTries": 20,
         "StepHeight": 18,
         "StickToGround": true,
         "UseCapsule": true,
@@ -70,6 +72,16 @@
         "Start": "0,0,12",
         "Static": false,
         "Surface": null
+      },
+      {
+        "__type": "ThirdPersonController",
+        "__enabled": true,
+        "Camera": "a144f09e-75c6-4b72-9767-47407c9840f0",
+        "CitizenAnimation": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+        "JumpStrength": 400,
+        "MoveHelper": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+        "RunSpeed": 250,
+        "WalkSpeed": 120
       }
     ],
     "Children": [
