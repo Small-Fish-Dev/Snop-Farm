@@ -11,6 +11,7 @@
         "Camera": "a144f09e-75c6-4b72-9767-47407c9840f0",
         "CapsuleCollisions": true,
         "CitizenAnimation": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+        "Collider": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
         "CollisionHeight": 72,
         "CollisionRadius": 12,
         "Deceleration": 10,
@@ -19,6 +20,7 @@
         "JumpStrength": 400,
         "RunSpeed": 250,
         "StepHeight": 18,
+        "UseCollider": false,
         "WalkSpeed": 120
       },
       {
@@ -30,7 +32,7 @@
         "MaterialGroup": null,
         "MaterialOverride": null,
         "Model": "models/citizen/citizen.vmdl",
-        "ShouldCastShadows": true,
+        "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
@@ -57,6 +59,16 @@
         ],
         "Health": 10,
         "UnitType": "None"
+      },
+      {
+        "__type": "CapsuleCollider",
+        "__enabled": true,
+        "End": "0,0,60",
+        "IsTrigger": false,
+        "Radius": 12,
+        "Start": "0,0,12",
+        "Static": false,
+        "Surface": null
       }
     ],
     "Children": [
