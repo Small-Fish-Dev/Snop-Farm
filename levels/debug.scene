@@ -93,6 +93,35 @@
       "Scale": "2,2,2",
       "Enabled": true,
       "__Prefab": "prefabs/snot.prefab"
+    },
+    {
+      "Id": "98f2c786-06ba-4904-8a57-20f2cf37ae96",
+      "Name": "Plane",
+      "Position": "570.4523,88.61359,18.41823",
+      "Rotation": "-0.216584,0,0,0.9762642",
+      "Scale": "2,2.200003,1",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "ModelRenderer",
+          "__enabled": true,
+          "BodyGroups": 18446744073709551615,
+          "MaterialGroup": null,
+          "MaterialOverride": null,
+          "Model": "models/dev/plane.vmdl",
+          "RenderType": "On",
+          "Tint": "1,1,1,1"
+        },
+        {
+          "__type": "BoxCollider",
+          "__enabled": true,
+          "Center": "0,0,-1.900022",
+          "IsTrigger": false,
+          "Scale": "99.09992,100.2,3.300024",
+          "Static": false,
+          "Surface": null
+        }
+      ]
     }
   ],
   "SceneProperties": {
