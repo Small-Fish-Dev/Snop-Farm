@@ -11,7 +11,7 @@
         "MaterialGroup": null,
         "MaterialOverride": null,
         "Model": "models/pistol.vmdl",
-        "ShouldCastShadows": true,
+        "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
@@ -24,8 +24,9 @@
         "UnitType": "Turret"
       },
       {
-        "__type": "ColliderBoxComponent",
+        "__type": "BoxCollider",
         "__enabled": true,
+        "Center": "0,0,0",
         "IsTrigger": false,
         "Scale": "50,50,50",
         "Static": false,

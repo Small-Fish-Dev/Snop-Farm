@@ -1,4 +1,3 @@
-
 using Sandbox.Citizen;
 
 [Title( "Third Person Controller" )]
@@ -16,6 +15,7 @@ public class ThirdPersonController : Component
 	public bool UseCollider { get; set; } = false;
 
 	[Property]
+	[HideIf( "UseCollider", true )]
 	public Collider Collider { get; set; }
 
 	[Range( 0f, 400f, 1f, true, true )]
@@ -31,14 +31,17 @@ public class ThirdPersonController : Component
 	public float JumpStrength { get; set; } = 400f; // How high we jump
 
 	[Property]
-	public bool CapsuleCollisions { get; set; } = true; // Capsule or BBox
+	[HideIf( "UseCollider", true )]
+	public bool UseCapsule { get; set; } = true;
 
 	[Range( 0f, 64f, 1f, true, true )]
 	[Property]
+	[HideIf( "UseCollider", true )]
 	public float CollisionRadius { get; set; } = 16f; // The thickness of our collision
 
 	[Range( 0f, 200f, 1f, true, true )]
 	[Property]
+	[HideIf( "UseCollider", true )]
 	public float CollisionHeight { get; set; } = 72f; // The height of our collision
 
 	[Range( 0f, 64f, 1f, true, true )]
@@ -48,6 +51,9 @@ public class ThirdPersonController : Component
 	[Range( 0f, 90f, 0.01f, true, true )]
 	[Property]
 	public float GroundAngle { get; set; } = 45f; // How steep terrain can be for you to walk over
+
+	[Property]
+	public bool StickToGround { get; set; } = true;
 
 
 	[Range( 0f, 20f, 0.01f, true, true )]
@@ -69,14 +75,14 @@ public class ThirdPersonController : Component
 	public Vector3 WishVelocity { get; private set; }
 	public Vector3 Velocity { get; set; }
 	public bool IsOnGround { get; set; }
+	public bool IsCapsuleCollider => UseCollider ? Collider is CapsuleCollider : UseCapsule;
 	private int _stuckTries;
-
 
 	protected override void DrawGizmos()
 	{
 		Gizmo.GizmoDraw draw = Gizmo.Draw;
 
-		if ( CapsuleCollisions )
+		if ( UseCapsule )
 			draw.LineCapsule( DefineCapsule() );
 		else
 			draw.LineBBox( DefineBBox() );
@@ -135,12 +141,16 @@ public class ThirdPersonController : Component
 
 	private PhysicsTraceBuilder BuildTrace( PhysicsTraceBuilder source )
 	{
-		if ( CapsuleCollisions )
-			return source.Capsule( CollisionCapsule ).WithoutTags( IgnoreLayers );
+		if ( IsCapsuleCollider )
+		{
+			return source.Capsule( CollisionCapsule )
+				.WithoutTags( IgnoreLayers );
+		}
 		else
 		{
 			BBox hull = CollisionBBox;
-			return source.Size( in hull ).WithoutTags( IgnoreLayers );
+			return source.Size( in hull )
+				.WithoutTags( IgnoreLayers );
 		}
 	}
 
@@ -183,6 +193,7 @@ public class ThirdPersonController : Component
 
 		to.z -= (isOnGround ? StepHeight : 0.1f);
 		PhysicsTraceResult physicsTraceResult = BuildTrace( from, to ).Run();
+
 		if ( !physicsTraceResult.Hit || Vector3.GetAngle( Vector3.Up, physicsTraceResult.Normal ) > GroundAngle )
 		{
 			IsOnGround = false;
@@ -267,15 +278,6 @@ public class ThirdPersonController : Component
 		_stuckTries++;
 		return true;
 	}
-
-	public Capsule DefineCapsule()
-	{
-		if ( !UseCollider || Collider == null || Collider is not CapsuleCollider capsule )
-			return new Capsule( Vector3.Up * CollisionRadius, Vector3.Up * (CollisionHeight - CollisionRadius), CollisionRadius );
-		else
-			return new Capsule( capsule.Start, capsule.End, capsule.Radius );
-	}
-
 	public BBox DefineBBox()
 	{
 		if ( !UseCollider || Collider == null || Collider is not BoxCollider box )
@@ -284,12 +286,19 @@ public class ThirdPersonController : Component
 			return new BBox( box.Center - box.Scale / 2f, box.Center + box.Scale / 2f );
 	}
 
+	public Capsule DefineCapsule()
+	{
+		if ( !UseCollider || Collider == null || Collider is not CapsuleCollider capsule )
+			return new Capsule( Vector3.Up * CollisionRadius, Vector3.Up * (CollisionHeight - CollisionRadius), CollisionRadius );
+		else
+			return new Capsule( capsule.Start, capsule.End, capsule.Radius );
+	}
 	protected override void OnStart() // Called as soon as the component gets enabled
 	{
 		base.OnStart();
 
-		CollisionCapsule = DefineCapsule();
 		CollisionBBox = DefineBBox();
+		CollisionCapsule = DefineCapsule();
 
 		if ( Camera != null )
 		{
@@ -310,8 +319,6 @@ public class ThirdPersonController : Component
 			Camera.Transform.Position = Transform.Position + Vector3.Up * InitialCameraPosition.z + InitialCameraPosition.WithZ( 0 ) * eyeRotation;
 			Camera.Transform.Rotation = eyeRotation; // Set the camera's rotation based off of our eye angles
 		}
-
-		Log.Info( Collider is CapsuleCollider );
 	}
 
 	protected override void OnFixedUpdate() // Called every tick
