@@ -78,6 +78,7 @@
         "__enabled": true,
         "Camera": "a144f09e-75c6-4b72-9767-47407c9840f0",
         "CitizenAnimation": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+        "EyePosition": "0,0,64",
         "JumpStrength": 400,
         "MoveHelper": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
         "RunSpeed": 250,

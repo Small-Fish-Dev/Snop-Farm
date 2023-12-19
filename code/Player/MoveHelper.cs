@@ -1,4 +1,3 @@
-[Title( "Move Helper" )]
 public class MoveHelper : Component
 {
 	[Property]

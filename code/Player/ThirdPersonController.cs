@@ -1,9 +1,5 @@
 using Sandbox.Citizen;
 
-[Title( "Third Person Controller" )]
-[Category( "Physics" )]
-[Icon( "directions_walk" )]
-[EditorHandle( "materials/gizmo/charactercontroller.png" )]
 public class ThirdPersonController : Component
 {
 	[Property]
@@ -12,6 +8,9 @@ public class ThirdPersonController : Component
 	public CitizenAnimationHelper CitizenAnimation { get; set; }
 	[Property]
 	public MoveHelper MoveHelper { get; set; }
+
+	[Property]
+	public Vector3 EyePosition { get; set; } = new Vector3( 0f, 0f, 64f );
 
 	[Range( 0f, 400f, 1f, true, true )]
 	[Property]
@@ -28,6 +27,16 @@ public class ThirdPersonController : Component
 	public Vector3 WishVelocity;
 	public Vector3 InitialCameraPosition { get; private set; }
 	public Angles EyeAngles { get; private set; }
+
+	protected override void DrawGizmos()
+	{
+		Gizmo.GizmoDraw draw = Gizmo.Draw;
+		var forward = base.Transform.Rotation.Forward;
+		var right = base.Transform.Rotation.Right;
+
+		draw.SolidCone( EyePosition + forward * 5f - right * 2f, forward * 10f, 1f );
+		draw.SolidCone( EyePosition + forward * 5f + right * 2f, forward * 10f, 1f );
+	}
 
 	protected override void OnStart() // Called as soon as the component gets enabled
 	{
