@@ -58,7 +58,7 @@ public class ThirdPersonController : Component
 
 			var eyeRotation = EyeAngles.ToRotation();
 
-			Camera.Transform.Position = Transform.Position + Vector3.Up * InitialCameraPosition.z + InitialCameraPosition.WithZ( 0 ) * eyeRotation;
+			Camera.Transform.Position = Transform.Position + EyePosition + ( InitialCameraPosition - EyePosition ) * eyeRotation; // Rotate camera around eyeposition relative to initial position
 			Camera.Transform.Rotation = eyeRotation; // Set the camera's rotation based off of our eye angles
 		}
 	}
