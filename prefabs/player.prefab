@@ -40,7 +40,7 @@
           "Slime"
         ],
         "Health": 10,
-        "UnitType": "None"
+        "UnitType": "Player"
       },
       {
         "__type": "MoveHelper",
@@ -83,6 +83,16 @@
         "MoveHelper": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
         "RunSpeed": 250,
         "WalkSpeed": 120
+      },
+      {
+        "__type": "SnotPlayer",
+        "__enabled": true,
+        "CitizenAnimation": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+        "Controller": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+        "PunchRange": 120,
+        "PunchStrength": 1,
+        "PunchWidth": 20,
+        "UnitInfo": "35c2419c-d094-4be5-b8a4-8b3916c19fdf"
       }
     ],
     "Children": [

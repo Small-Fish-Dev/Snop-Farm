@@ -14,12 +14,13 @@
         "MaterialGroup": null,
         "MaterialOverride": null,
         "Model": "models/enemies/gooman/gooman.vmdl",
-        "ShouldCastShadows": true,
+        "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "ColliderSphereComponent",
+        "__type": "SphereCollider",
         "__enabled": true,
+        "Center": "0,0,0",
         "IsTrigger": false,
         "Radius": 25,
         "Static": true,
@@ -33,7 +34,7 @@
           "Turret",
           "NPC"
         ],
-        "Health": 2,
+        "Health": 5,
         "UnitType": "Slime"
       }
     ]
