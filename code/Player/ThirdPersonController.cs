@@ -27,6 +27,7 @@ public class ThirdPersonController : Component
 	public Vector3 WishVelocity;
 	public Vector3 InitialCameraPosition { get; private set; }
 	public Angles EyeAngles { get; private set; }
+	public Rotation EyeRotation => EyeAngles.ToRotation();
 
 	protected override void DrawGizmos()
 	{
