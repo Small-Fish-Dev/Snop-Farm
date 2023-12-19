@@ -14,7 +14,7 @@ public sealed class SnotPlayer : Component
 
 	[Range( 0f, 10f, 0.1f, true, true )]
 	[Property]
-	public float PunchStrength { get; set; } = 1f;
+	public float PunchDamage { get; set; } = 1f;
 
 	[Range( 10f, 500f, 1f, true, true )]
 	[Property]
@@ -24,6 +24,12 @@ public sealed class SnotPlayer : Component
 	[Property]
 	public float PunchWidth { get; set; } = 20f;
 
+	[Range( 0f, 2f, 0.1f, true, true )]
+	[Property]
+	public float PunchCooldown { get; set; } = 0.5f;
+
+	public TimeSince LastPunch { get; set; } = 0f;
+
 	protected override void OnFixedUpdate()
 	{
 		if ( Controller == null ) return;
@@ -32,7 +38,12 @@ public sealed class SnotPlayer : Component
 		//Animator.WithVelocity( Controller.Velocity );
 
 		if ( Input.Down( "Punch" ) )
-			Punch();
+			if ( LastPunch >= PunchCooldown )
+				Punch();
+
+		if ( LastPunch >= PunchCooldown * 4f )
+			if ( CitizenAnimation != null )
+				CitizenAnimation.HoldType = CitizenAnimationHelper.HoldTypes.None;
 	}
 
 	public void Punch()
@@ -53,9 +64,15 @@ public sealed class SnotPlayer : Component
 
 		if ( punchTrace.Hit )
 			if ( punchTrace.GameObject.Components.TryGet<UnitInfo>( out UnitInfo unitInfo ) )
-			{
-				unitInfo.Damage( PunchStrength );
-			}
+				unitInfo.Damage( PunchDamage );
+
+		if ( CitizenAnimation != null )
+		{
+			CitizenAnimation.HoldType = CitizenAnimationHelper.HoldTypes.Punch;
+			CitizenAnimation.Target.Set( "b_attack", true );
+		}
+
+		LastPunch = 0;
 
 		//Log.Info( punchTrace.GameObject.GetAllObjects( true ).FirstOrDefault().Name );
 	}

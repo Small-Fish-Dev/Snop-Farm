@@ -89,8 +89,9 @@
         "__enabled": true,
         "CitizenAnimation": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
         "Controller": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+        "PunchCooldown": 0.5,
+        "PunchDamage": 1,
         "PunchRange": 120,
-        "PunchStrength": 1,
         "PunchWidth": 20,
         "UnitInfo": "35c2419c-d094-4be5-b8a4-8b3916c19fdf"
       }
