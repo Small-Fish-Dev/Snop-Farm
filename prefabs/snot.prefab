@@ -35,7 +35,16 @@
           "NPC"
         ],
         "Health": 5,
+        "HurtInvulnerabilityTimer": 0.2,
+        "Renderer": "c28dff48-2d6a-457d-a3ca-9b9134d0c232",
         "UnitType": "Slime"
+      },
+      {
+        "__type": "MultiplyPrefab",
+        "__enabled": true,
+        "DistanceFromOrigin": 60,
+        "PrefabToSpawn": "prefabs/snot.prefab",
+        "TimeBetweenAttempts": 5
       }
     ]
   },

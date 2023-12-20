@@ -40,6 +40,7 @@
           "Slime"
         ],
         "Health": 10,
+        "Renderer": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
         "UnitType": "Player"
       },
       {
