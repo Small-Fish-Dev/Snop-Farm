@@ -42,9 +42,10 @@
       {
         "__type": "MultiplyPrefab",
         "__enabled": true,
-        "DistanceFromOrigin": 60,
+        "MaxDistance": 90,
+        "MinDistance": 60,
         "PrefabToSpawn": "prefabs/snot.prefab",
-        "TimeBetweenAttempts": 5
+        "TimeBetweenAttempts": 2
       }
     ]
   },
