@@ -46,17 +46,10 @@
     {
       "Id": "673e500a-7c1d-4cef-aa2f-5722d0376011",
       "Name": "player",
-      "Position": "1031.805,352.0158,0",
+      "Position": "864.701,352.0158,0",
       "Tags": "player",
       "Enabled": true,
       "__Prefab": "prefabs/player.prefab"
-    },
-    {
-      "Id": "4f6ca959-c08b-4bd3-95f2-16b2771c1aa5",
-      "Name": "turret",
-      "Position": "1254.719,356.7598,0",
-      "Enabled": true,
-      "__Prefab": "prefabs/turret.prefab"
     },
     {
       "Id": "ea73dff4-6290-426a-8612-380f72d22d3f",
@@ -122,6 +115,27 @@
           "Surface": null
         }
       ]
+    },
+    {
+      "Id": "dbf7c096-e96c-40f8-a7fe-bdda8336f0f0",
+      "Name": "turret",
+      "Position": "1234.332,255.271,-0.00001525879",
+      "Enabled": true,
+      "__Prefab": "prefabs/pistol_turret.prefab"
+    },
+    {
+      "Id": "6241888c-b848-49bc-b382-a30a56fb5e1d",
+      "Name": "turret",
+      "Position": "1238.942,435.7418,0",
+      "Enabled": true,
+      "__Prefab": "prefabs/pistol_turret.prefab"
+    },
+    {
+      "Id": "1dd8854f-ef53-4f95-bb11-93d30f88dd32",
+      "Name": "smg_turret",
+      "Position": "975.5427,338.6859,1",
+      "Enabled": true,
+      "__Prefab": "prefabs/smg_turret.prefab"
     }
   ],
   "SceneProperties": {

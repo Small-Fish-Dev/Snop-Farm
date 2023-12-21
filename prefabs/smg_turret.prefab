@@ -1,0 +1,56 @@
+{
+  "RootObject": {
+    "Id": "69e23b31-dfcf-453d-aea5-2bc4d87be93b",
+    "Name": "smg_turret",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "__enabled": true,
+        "BodyGroups": 18446744073709551615,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/smg.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "UnitInfo",
+        "__enabled": true,
+        "EnemyUnitTypes": [
+          "Slime"
+        ],
+        "Health": 5,
+        "HurtInvulnerabilityTimer": 0.15,
+        "Renderer": null,
+        "UnitType": "Turret"
+      },
+      {
+        "__type": "BoxCollider",
+        "__enabled": true,
+        "Center": "0,0,0",
+        "IsTrigger": false,
+        "Scale": "50,50,50",
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "PointAndShoot",
+        "__enabled": true,
+        "Damage": 0.7,
+        "DamageCone": 30,
+        "FiringRate": 0.2,
+        "MaxRange": 350,
+        "Nuzzle": "25.6,0,37.69999",
+        "RotatingSpeed": 120,
+        "UnitInfo": "69e23b31-dfcf-453d-aea5-2bc4d87be93b"
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": [
+    "rifter.ctd_smg"
+  ]
+}
