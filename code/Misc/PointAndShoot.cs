@@ -2,6 +2,9 @@ using Sandbox;
 
 public class PointAndShoot : Component
 {
+	[Property]
+	public UnitInfo UnitInfo { get; set; }
+
 	[Range( 10f, 1000f, 1f, true, true )]
 	[Property]
 	public float MaxRange { get; set; } = 250f;
@@ -63,6 +66,43 @@ public class PointAndShoot : Component
 	{
 		base.OnFixedUpdate();
 
+		if ( UnitInfo == null ) return;
+
+		// TODO Check every tot seconds or else too laggy
+		var allEnemies = Scene.GetAllComponents<UnitInfo>()
+			.Where( x => UnitInfo.EnemyUnitTypes.Contains( x.UnitType ) );
+		var closestComponent = allEnemies.OrderBy( x => x.GameObject.Transform.Position.Distance( Transform.Position ) )
+			.FirstOrDefault();
+
+		if ( closestComponent != null )
+		{
+			var closestEnemy = closestComponent.GameObject;
+
+			if ( closestEnemy != null && closestEnemy.Transform.Position.Distance( Transform.Position ) <= MaxRange )
+			{
+				var goalRotation = Rotation.LookAt( closestEnemy.Transform.Position.WithZ( 0 ) - Transform.Position.WithZ( 0 ), Vector3.Up );
+				Transform.Rotation = RotateTowards( Transform.Rotation, goalRotation, RotatingSpeed * Time.Delta );
+
+				var relativeAngle = Transform.Rotation.Forward.WithZ( 0 ).Normal.Angle( goalRotation.Forward.WithZ( 0 ).Normal );
+
+				if ( relativeAngle <= DamageCone / 2 )
+					if ( LastShot >= FiringRate )
+					{
+						LastShot = 0f;
+						closestComponent.Damage( Damage );
+					}
+			}
+		}
+
+		//Transform.Rotation *= Rotation.FromYaw( RotatingSpeed * Time.Delta );
+	}
+
+	// Thank you ShadowBrain!
+	Rotation RotateTowards( Rotation from, Rotation to, float maxDegreesDelta )
+	{
+		float angle = Rotation.Difference( from, to ).Angle();
+		float t = MathF.Min( 1f, maxDegreesDelta / angle );
+		return Rotation.Slerp( from, to, t );
 	}
 
 }

@@ -42,7 +42,8 @@
         "FiringRate": 0.5,
         "MaxRange": 250,
         "Nuzzle": "25.6,0,37.69999",
-        "RotatingSpeed": 40
+        "RotatingSpeed": 40,
+        "UnitInfo": "69e23b31-dfcf-453d-aea5-2bc4d87be93b"
       }
     ]
   },
