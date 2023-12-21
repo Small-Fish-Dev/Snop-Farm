@@ -12,23 +12,32 @@ public sealed class MultiplyPrefab : Component
 	public float MaxDistance { get; set; } = 70f;
 
 	[Property]
-	public float TimeBetweenAttempts { get; set; } = 5f;
+	public float MinTimeBetweenAttempts { get; set; } = 4f;
+
+	[Property]
+	public float MaxTimeBetweenAttempts { get; set; } = 8f;
 
 	public TimeSince LastSpawnAttempt { get; set; } = 0f;
+	private float _nextAttempt;
 
 	protected override void DrawGizmos()
 	{
-		Gizmo.GizmoDraw draw = Gizmo.Draw;
+		if ( Gizmo.IsSelected )
+		{
+			Gizmo.GizmoDraw draw = Gizmo.Draw;
 
-		draw.LineThickness = 5f;
-		draw.LineCircle( 0f, Vector3.Up, MinDistance , 0f, 360f, 40 );
-		draw.LineCircle( 0f, Vector3.Up, MaxDistance, 0f, 360f, 40 );
+			draw.LineThickness = 5f;
+			draw.LineCircle( 0f, Vector3.Up, MinDistance, 0f, 360f, 40 );
+			draw.LineCircle( 0f, Vector3.Up, MaxDistance, 0f, 360f, 40 );
+		}
 	}
 
 
 	protected override void OnStart()
 	{
 		base.OnStart();
+
+		_nextAttempt = Game.Random.Float( MinTimeBetweenAttempts, MaxTimeBetweenAttempts );
 	}
 
 	protected override void OnFixedUpdate()
@@ -37,36 +46,35 @@ public sealed class MultiplyPrefab : Component
 
 		if ( PrefabToSpawn == null ) return;
 
-		if ( LastSpawnAttempt >= TimeBetweenAttempts )
+		if ( LastSpawnAttempt >= _nextAttempt )
 			AttemptSpawn();
 	}
 
 	public void AttemptSpawn()
 	{
 		LastSpawnAttempt = 0f;
+		_nextAttempt = Game.Random.Float( MinTimeBetweenAttempts, MaxTimeBetweenAttempts );
 
-		var anglesToTry = 8;
+		var anglesToTry = 16;
+		var angleSize = 360f / anglesToTry;
+		var randomAngle = Game.Random.Int( anglesToTry ) * angleSize;
 
-		for ( int angle = 0; angle <= 360; angle += 360 / anglesToTry )
+		for ( float angle = 0f; angle <= 360f; angle += angleSize )
 		{
-			var directionToTry = Rotation.FromYaw( angle );
+			var directionToTry = Rotation.FromYaw( angle + randomAngle);
 			var randomDistance = Game.Random.Float( MinDistance, MaxDistance );
 			var startPos = Transform.Position + Vector3.Up * 32f;
 			var midPos = startPos + directionToTry.Forward * randomDistance;
 			var horizontalTrace = Scene.Trace.FromTo( startPos, midPos )
-				.WithoutTags( "Unit" )
 				.Run();
 
 			if ( horizontalTrace.Hit ) continue;
 
 			var endPos = midPos + Vector3.Down * 64f;
 			var verticalTrace = Scene.Trace.FromTo( midPos, endPos )
-				.WithoutTags( "Unit" )
 				.Run();
 
-			if ( !verticalTrace.Hit ) continue;
-
-			Log.Info( verticalTrace.GameObject.Tags.TryGetAll().Count() );
+			if ( !verticalTrace.Hit || verticalTrace.GameObject.Tags.Has( "Unit" ) ) continue;
 
 			SpawnPrefab( verticalTrace.HitPosition );
 			return;
@@ -77,5 +85,6 @@ public sealed class MultiplyPrefab : Component
 	{
 		var spawned = SceneUtility.Instantiate( SceneUtility.GetPrefabScene( PrefabToSpawn ) );
 		spawned.Transform.Position = position;
+		spawned.Transform.Rotation = Rotation.FromYaw( Game.Random.Float( 360f ) );
 	}
 }
