@@ -1,4 +1,4 @@
-public sealed class UnitInfo : Component
+public class UnitInfo : Component
 {
 	[Property]
 	public float Health { get; set; } = 10f;
@@ -52,7 +52,7 @@ public sealed class UnitInfo : Component
 			Kill();
 	}
 
-	public void Kill()
+	public virtual void Kill()
 	{
 		GameObject.Destroy();
 	}

@@ -1,6 +1,6 @@
 using Sandbox.Citizen;
 
-public sealed class SnotPlayer : Component
+public class SnotPlayer : Component
 {
 
 	[Property]

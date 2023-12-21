@@ -1,6 +1,6 @@
 using Sandbox;
 
-public sealed class MultiplyPrefab : Component
+public class MultiplyPrefab : Component
 {
 	[Property]
 	public PrefabFile PrefabToSpawn { get; set; }

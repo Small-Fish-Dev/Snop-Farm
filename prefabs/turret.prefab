@@ -21,6 +21,8 @@
           "Slime"
         ],
         "Health": 5,
+        "HurtInvulnerabilityTimer": 0.15,
+        "Renderer": null,
         "UnitType": "Turret"
       },
       {
@@ -31,6 +33,16 @@
         "Scale": "50,50,50",
         "Static": false,
         "Surface": null
+      },
+      {
+        "__type": "PointAndShoot",
+        "__enabled": true,
+        "Damage": 1,
+        "DamageCone": 15,
+        "FiringRate": 0.5,
+        "MaxRange": 250,
+        "Nuzzle": "25.6,0,37.69999",
+        "RotatingSpeed": 40
       }
     ]
   },
