@@ -1,0 +1,79 @@
+{
+  "RootObject": {
+    "Id": "69e23b31-dfcf-453d-aea5-2bc4d87be93b",
+    "Name": "electric_turret",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "__enabled": true,
+        "BodyGroups": 18446744073709551615,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/smg.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "UnitInfo",
+        "__enabled": true,
+        "EnemyUnitTypes": [
+          "Slime"
+        ],
+        "Health": 5,
+        "HurtInvulnerabilityTimer": 0.15,
+        "Renderer": null,
+        "UnitType": "Turret"
+      },
+      {
+        "__type": "BoxCollider",
+        "__enabled": true,
+        "Center": "0,0,0",
+        "IsTrigger": false,
+        "Scale": "50,50,50",
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "PointAndShoot",
+        "__enabled": true,
+        "Damage": 0.2,
+        "DamageCone": 360,
+        "FiringRate": 0.1,
+        "MaxRange": 200,
+        "Nuzzle": "25.6,0,37.69999",
+        "RotatingSpeed": 0,
+        "UnitInfo": "69e23b31-dfcf-453d-aea5-2bc4d87be93b"
+      }
+    ],
+    "Children": [
+      {
+        "Id": "8823071f-2cb9-4380-b12d-d801346beae8",
+        "Name": "Object",
+        "Position": "13.17708,-7.590956,49.94727",
+        "Rotation": "0.00000002158927,-0.0000000000000007233917,0.3622078,0.9320979",
+        "Scale": "0.4,0.3,0.1",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__enabled": true,
+            "BodyGroups": 18446744073709551615,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/japan_props_001/electricpole_4.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": [
+    "japancitymodels.electricpole_4",
+    "rifter.ctd_smg"
+  ]
+}
