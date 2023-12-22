@@ -76,6 +76,7 @@ public class UnitInfo : Component
 		if ( Renderer != null )
 			Renderer.Tint = oldColor;
 
-		Transform.Scale = _oldScale;
+		if ( GameObject != null )
+			Transform.Scale = _oldScale;
 	}
 }
