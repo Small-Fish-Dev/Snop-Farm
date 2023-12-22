@@ -4,8 +4,13 @@ public class ThirdPersonController : Component
 {
 	[Property]
 	public GameObject Camera { get; set; }
+
+	[Property]
+	public bool CameraCollisions { get; set; } = true;
+
 	[Property]
 	public CitizenAnimationHelper CitizenAnimation { get; set; }
+
 	[Property]
 	public MoveHelper MoveHelper { get; set; }
 
@@ -28,6 +33,7 @@ public class ThirdPersonController : Component
 	public Vector3 InitialCameraPosition { get; private set; }
 	public Angles EyeAngles { get; private set; }
 	public Rotation EyeRotation => EyeAngles.ToRotation();
+	public Vector3 EyeWorldPosition => Transform.World.PointToWorld( EyePosition );
 
 	protected override void DrawGizmos()
 	{
@@ -59,7 +65,16 @@ public class ThirdPersonController : Component
 
 			var eyeRotation = EyeAngles.ToRotation();
 
-			Camera.Transform.Position = Transform.Position + EyePosition + ( InitialCameraPosition - EyePosition ) * eyeRotation; // Rotate camera around eyeposition relative to initial position
+			Camera.Transform.Position = EyeWorldPosition + (InitialCameraPosition - EyePosition) * eyeRotation; // Rotate camera around eyeposition relative to initial position
+
+			var traceDirection = (Camera.Transform.World.Position - EyeWorldPosition ).Normal;
+			var maxDistance = Vector3.DistanceBetween( EyePosition, InitialCameraPosition );
+			var cameraTrace = Scene.Trace.FromTo( EyeWorldPosition, EyeWorldPosition + traceDirection * maxDistance )
+				.Size( 5f )
+				.WithoutTags( "Unit", "Player" )
+				.Run();
+
+			Camera.Transform.Position = cameraTrace.EndPosition;
 			Camera.Transform.Rotation = eyeRotation; // Set the camera's rotation based off of our eye angles
 		}
 	}
