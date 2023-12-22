@@ -53,6 +53,20 @@
       "__Prefab": "prefabs/pistol_turret.prefab"
     },
     {
+      "Id": "b1011e86-c749-48c8-a319-b61e45c36188",
+      "Name": "turret (1)",
+      "Position": "316.5667,-263.5294,0.0000880099",
+      "Enabled": true,
+      "__Prefab": "prefabs/pistol_turret.prefab"
+    },
+    {
+      "Id": "81e36b2f-9226-4c1c-ab4d-789c002dc6b7",
+      "Name": "turret (2)",
+      "Position": "342.8687,-160.7917,0.00008930857",
+      "Enabled": true,
+      "__Prefab": "prefabs/pistol_turret.prefab"
+    },
+    {
       "Id": "3b8ba041-1ee8-48ca-bfad-7cbf19089783",
       "Name": "smg_turret",
       "Position": "133.9001,-447.485,1.000031",
@@ -61,13 +75,20 @@
       "__Prefab": "prefabs/smg_turret.prefab"
     },
     {
-      "Id": "3a47f76c-c239-4ac8-af5e-a3a3aef024d6",
-      "Name": "snot",
-      "Position": "920.2833,-797.3314,0",
-      "Rotation": "0.0000003142804,0.0000002352241,0.7532498,0.6577349",
-      "Scale": "2,2,2",
+      "Id": "6af64ad0-9ee7-4d41-9f33-01e057ba9ae2",
+      "Name": "smg_turret (1)",
+      "Position": "207.8243,-438.9564,1.000026",
+      "Rotation": "-0.00000003492604,0.000000005313702,-0.707107,0.7071065",
       "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
+      "__Prefab": "prefabs/smg_turret.prefab"
+    },
+    {
+      "Id": "881be852-5809-4708-ae3c-7d51213f2135",
+      "Name": "smg_turret (2)",
+      "Position": "51.07544,-432.4265,1.000064",
+      "Rotation": "-0.00000003492604,0.000000005313702,-0.707107,0.7071065",
+      "Enabled": true,
+      "__Prefab": "prefabs/smg_turret.prefab"
     },
     {
       "Id": "1d3b5233-fdf3-45c6-97d5-39b0151c64ec",
@@ -82,15 +103,6 @@
       "Id": "6cbdf15e-07f1-4ed1-9683-b4305a707649",
       "Name": "snot (7)",
       "Position": "2285.542,-1735.533,-0.00119064",
-      "Rotation": "0.0000003142804,0.0000002352241,0.7532498,0.6577349",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "4a537711-6365-4a14-9325-df660006cc5c",
-      "Name": "snot (10)",
-      "Position": "64.63599,-1181.227,0.0006314074",
       "Rotation": "0.0000003142804,0.0000002352241,0.7532498,0.6577349",
       "Scale": "2,2,2",
       "Enabled": true,

@@ -37,10 +37,6 @@ public class MoveHelper : Component
 	[Property]
 	public float Acceleration { get; set; } = 10f;
 
-	[Range( 0f, 20f, 0.01f, true, true )]
-	[Property]
-	public float Deceleration { get; set; } = 10f;
-
 	[Range( 0f, 10f, 0.01f, true, true )]
 	[Property]
 	public float GroundFriction { get; set; } = 4f;
@@ -48,6 +44,10 @@ public class MoveHelper : Component
 	[Range( 0f, 10f, 0.01f, true, true )]
 	[Property]
 	public float AirFriction { get; set; } = 0.1f;
+
+	[Range( 0f, 1f, 0.01f, true, true )]
+	[Property]
+	public float AirControl { get; set; } = 0.2f;
 
 	[Property]
 	public bool UseSceneGravity { get; set; } = true;
@@ -259,21 +259,26 @@ public class MoveHelper : Component
 	{
 		base.OnFixedUpdate();
 
+		var fasterThanIntended = Velocity.WithZ( 0 ).Length > WishVelocity.WithZ( 0 ).Length;
+
 		if ( IsOnGround ) // If we're touching the ground VVV
 		{
 			if ( StickToGround )
 				Velocity = Velocity.WithZ( 0 ); // Nullify any vertical velocity to stick to the ground
 
 			Velocity = Velocity.WithAcceleration( WishVelocity, Acceleration );
-			Velocity = Velocity.WithFriction( GroundFriction * Time.Delta );
+			Velocity = Velocity.WithFriction( GroundFriction * Time.Delta * ( fasterThanIntended ? 2f : 1f ) );
 		}
 		else // If we're in air VVV
 		{
 			var gravity = UseSceneGravity ? Scene.PhysicsWorld.Gravity : Gravity;
 			Velocity += gravity * Time.Delta; // Apply the scene's gravity to the controller
-			Velocity = Velocity.WithAcceleration( WishVelocity, Acceleration );
-			Velocity = Velocity.WithFriction( GroundFriction * Time.Delta );
+			Velocity = Velocity.WithAcceleration( WishVelocity * AirControl, Acceleration );
+			Velocity = Velocity.WithFriction( AirFriction * Time.Delta * (fasterThanIntended ? 2f : 1f) );
 		}
+
+		if ( Velocity.WithZ(0).Length > WishVelocity.WithZ(0).Length )
+			Velocity = ( Velocity.Normal * WishVelocity.Length ).WithZ( Velocity.z ); // TODO This sucks
 
 		Move(); // Move our character
 	}

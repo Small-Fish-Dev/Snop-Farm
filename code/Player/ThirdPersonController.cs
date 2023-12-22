@@ -109,7 +109,7 @@ public class ThirdPersonController : Component
 	public void ComputeWishVelocity()
 	{
 		var playerYaw = Rotation.FromYaw( EyeAngles.yaw ); // Horizontal movement only needs yaw based off of where we're looking
-		var direction = Input.AnalogMove * playerYaw; // Rotate your inputs based on your eye angles
+		var direction = Input.AnalogMove.Normal * playerYaw; // Normalize input and rotate based on your eye angles
 		var wishSpeed = Input.Down( "Run" ) ? RunSpeed : WalkSpeed; // If we're running we use the running speed, else the walking speed
 
 		WishVelocity = direction * wishSpeed; // The direction is normal, so we multiply its magnitude with the wish speed
