@@ -87,52 +87,6 @@ public class MoveHelper : Component
 			draw.LineBBox( DefineBBox() );
 	}
 
-	//
-	// Summary:
-	//     Add acceleration to the current velocity. No need to scale by time delta - it
-	//     will be done inside.
-	public void Accelerate( Vector3 vector )
-	{
-		if ( vector.IsNearZeroLength )
-			return;
-
-		Vector3 normal = vector.Normal;
-		float length = vector.Length;
-		float num = Velocity.Dot( normal );
-		float num2 = length - num;
-		if ( !(num2 <= 0f) )
-		{
-			float num3 = Acceleration * Time.Delta * length;
-			if ( num3 > num2 )
-				num3 = num2;
-
-			Velocity += normal * num3;
-		}
-	}
-
-	//
-	// Summary:
-	//     Apply an amount of friction to the current velocity. No need to scale by time
-	//     delta - it will be done inside.
-	public void ApplyFriction( float frictionAmount, float stopSpeed = 140f )
-	{
-		float length = Velocity.Length;
-		if ( !(length < 0.01f) )
-		{
-			float num = ((length < stopSpeed) ? stopSpeed : length);
-			float num2 = num * Time.Delta * frictionAmount;
-			float num3 = length - num2;
-			if ( num3 < 0f )
-				num3 = 0f;
-
-			if ( num3 != length )
-			{
-				num3 /= length;
-				Velocity *= num3;
-			}
-		}
-	}
-
 	private PhysicsTraceBuilder BuildTrace( Vector3 from, Vector3 to )
 	{
 		return BuildTrace( base.Scene.PhysicsWorld.Trace.Ray( in from, in to ) );
@@ -310,15 +264,15 @@ public class MoveHelper : Component
 			if ( StickToGround )
 				Velocity = Velocity.WithZ( 0 ); // Nullify any vertical velocity to stick to the ground
 
-			Accelerate( WishVelocity );
-			ApplyFriction( GroundFriction );
+			Velocity = Velocity.WithAcceleration( WishVelocity, Acceleration );
+			Velocity = Velocity.WithFriction( GroundFriction * Time.Delta );
 		}
 		else // If we're in air VVV
 		{
 			var gravity = UseSceneGravity ? Scene.PhysicsWorld.Gravity : Gravity;
 			Velocity += gravity * Time.Delta; // Apply the scene's gravity to the controller
-			Accelerate( WishVelocity );
-			ApplyFriction( AirFriction );
+			Velocity = Velocity.WithAcceleration( WishVelocity, Acceleration );
+			Velocity = Velocity.WithFriction( GroundFriction * Time.Delta );
 		}
 
 		Move(); // Move our character
