@@ -75,22 +75,6 @@
       "__Prefab": "prefabs/smg_turret.prefab"
     },
     {
-      "Id": "6af64ad0-9ee7-4d41-9f33-01e057ba9ae2",
-      "Name": "smg_turret (1)",
-      "Position": "207.8243,-438.9564,1.000026",
-      "Rotation": "-0.00000003492604,0.000000005313702,-0.707107,0.7071065",
-      "Enabled": true,
-      "__Prefab": "prefabs/smg_turret.prefab"
-    },
-    {
-      "Id": "881be852-5809-4708-ae3c-7d51213f2135",
-      "Name": "smg_turret (2)",
-      "Position": "51.07544,-432.4265,1.000064",
-      "Rotation": "-0.00000003492604,0.000000005313702,-0.707107,0.7071065",
-      "Enabled": true,
-      "__Prefab": "prefabs/smg_turret.prefab"
-    },
-    {
       "Id": "1d3b5233-fdf3-45c6-97d5-39b0151c64ec",
       "Name": "snot (1)",
       "Position": "1075.827,-644.5665,-0.0001049786",
@@ -116,6 +100,13 @@
       "Scale": "2,2,2",
       "Enabled": true,
       "__Prefab": "prefabs/snot.prefab"
+    },
+    {
+      "Id": "e76ee5af-e49c-4317-8244-7e0a7efab619",
+      "Name": "electric_turret",
+      "Position": "138.264,-780.3425,1.000061",
+      "Enabled": true,
+      "__Prefab": "prefabs/electric_turret.prefab"
     }
   ],
   "SceneProperties": {

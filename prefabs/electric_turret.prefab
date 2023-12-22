@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "69e23b31-dfcf-453d-aea5-2bc4d87be93b",
+    "Id": "e76ee5af-e49c-4317-8244-7e0a7efab619",
     "Name": "electric_turret",
     "Enabled": true,
     "Components": [
@@ -21,7 +21,6 @@
           "Slime"
         ],
         "Health": 5,
-        "HurtInvulnerabilityTimer": 0.15,
         "Renderer": null,
         "UnitType": "Turret"
       },
@@ -37,18 +36,19 @@
       {
         "__type": "PointAndShoot",
         "__enabled": true,
+        "AreaOfEffect": true,
         "Damage": 0.2,
         "DamageCone": 360,
         "FiringRate": 0.1,
         "MaxRange": 200,
         "Nuzzle": "25.6,0,37.69999",
         "RotatingSpeed": 0,
-        "UnitInfo": "69e23b31-dfcf-453d-aea5-2bc4d87be93b"
+        "UnitInfo": "e76ee5af-e49c-4317-8244-7e0a7efab619"
       }
     ],
     "Children": [
       {
-        "Id": "8823071f-2cb9-4380-b12d-d801346beae8",
+        "Id": "c9cebb40-d9cc-45c7-ae88-32a2bf3e984d",
         "Name": "Object",
         "Position": "13.17708,-7.590956,49.94727",
         "Rotation": "0.00000002158927,-0.0000000000000007233917,0.3622078,0.9320979",

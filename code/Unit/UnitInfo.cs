@@ -13,7 +13,7 @@ public class UnitInfo : Component
 	public List<UnitType> EnemyUnitTypes { get; set; }
 
 	public float LastDamage { get; set; } = 0;
-	public float HurtAnimationDuration => LastDamage / 10f;
+	public float HurtAnimationDuration => Math.Max( LastDamage / 10f, 0.05f );
 	public TimeSince LastHurt { get; set; } = float.MaxValue;
 	public bool HurtAnimation => LastHurt != float.MaxValue && LastHurt <= HurtAnimationDuration;
 

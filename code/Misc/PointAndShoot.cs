@@ -26,6 +26,9 @@ public class PointAndShoot : Component
 	public float Damage { get; set; } = 1f;
 
 	[Property]
+	public bool AreaOfEffect { get; set; } = false;
+
+	[Property]
 	public Vector3 Nuzzle { get; set; }
 
 	public TimeSince LastShot { get; set; } = 0f;
@@ -52,25 +55,6 @@ public class PointAndShoot : Component
 			var firingSpeed = RealTime.Now % FiringRate;
 			if ( firingSpeed <= FiringRate / 2f )
 				draw2.SolidCone( Nuzzle + Vector3.Forward * 16f, Vector3.Backward * 16f, 5 ); // Display firing rate
-			/*
-			Gizmo.GizmoDraw draw = Gizmo.Draw;
-
-			draw.LineThickness = 10f;
-			var totalSegments = 10;
-			var rangePerSegment = MaxRange / totalSegments;
-			for ( int segment = 0; segment <= totalSegments; segment++ )
-			{
-				draw.LineCircle( Nuzzle, Vector3.Up, rangePerSegment * segment, -DamageCone / 2, DamageCone, 40 );
-			}
-
-			var rotationSpeed = Rotation.FromYaw( RealTime.Now * RotatingSpeed );
-			draw.Line( Nuzzle + Vector3.Up * 12f + rotationSpeed.Right * 100f, Nuzzle + Vector3.Up * 12f - rotationSpeed.Right * 100f );
-
-			var firingSpeed = RealTime.Now % FiringRate;
-			if ( firingSpeed <= FiringRate / 2f )
-				draw.SolidCone( Nuzzle + Vector3.Forward * 16f, Vector3.Backward * 16f, 5 );
-
-			draw.LineCircle( Nuzzle, 5f );*/
 		}
 	}
 
@@ -78,7 +62,6 @@ public class PointAndShoot : Component
 	protected override void OnStart()
 	{
 		base.OnStart();
-
 	}
 
 	protected override void OnFixedUpdate()
@@ -88,32 +71,19 @@ public class PointAndShoot : Component
 		if ( UnitInfo == null ) return;
 
 		// TODO Check every tot seconds or else too laggy
-		var allEnemies = Scene.GetAllComponents<UnitInfo>()
-			.Where( x => UnitInfo.EnemyUnitTypes.Contains( x.UnitType ) );
-		var closestComponent = allEnemies.OrderBy( x => x.GameObject.Transform.Position.Distance( Transform.Position ) )
-			.FirstOrDefault();
 
-		if ( closestComponent != null )
+		if ( LastShot >= FiringRate )
 		{
-			var closestEnemy = closestComponent.GameObject;
+			var closestEnemy = AreaOfEffect ? AOEDamage() : SingleDamage();
 
-			if ( closestEnemy != null && closestEnemy.Transform.Position.Distance( Transform.Position ) <= MaxRange )
+			if ( closestEnemy != null )
 			{
 				var goalRotation = Rotation.LookAt( closestEnemy.Transform.Position.WithZ( 0 ) - Transform.Position.WithZ( 0 ), Vector3.Up );
 				Transform.Rotation = RotateTowards( Transform.Rotation, goalRotation, RotatingSpeed * Time.Delta );
-
-				var relativeAngle = Transform.Rotation.Forward.WithZ( 0 ).Normal.Angle( goalRotation.Forward.WithZ( 0 ).Normal );
-
-				if ( relativeAngle <= DamageCone / 2 )
-					if ( LastShot >= FiringRate )
-					{
-						LastShot = 0f;
-						closestComponent.Damage( Damage );
-					}
 			}
-		}
 
-		//Transform.Rotation *= Rotation.FromYaw( RotatingSpeed * Time.Delta );
+			LastShot = 0f;
+		}		
 	}
 
 	// Thank you ShadowBrain!
@@ -124,4 +94,45 @@ public class PointAndShoot : Component
 		return Rotation.Slerp( from, to, t );
 	}
 
+	protected UnitInfo AOEDamage()
+	{
+		var allEnemies = Scene.GetAllComponents<UnitInfo>()
+			.Where( x => UnitInfo.EnemyUnitTypes.Contains( x.UnitType ) )
+			.Where( x => x.Transform.Position.Distance( Transform.Position ) <= MaxRange );
+
+		var closestEnemy = allEnemies.OrderBy( x => x.GameObject.Transform.Position.Distance( Transform.Position ) )
+			.FirstOrDefault();
+
+		foreach ( var enemy in allEnemies )
+		{
+			var direction = Rotation.LookAt( enemy.Transform.Position.WithZ( 0 ) - Transform.Position.WithZ( 0 ), Vector3.Up );
+			var relativeAngle = Transform.Rotation.Forward.WithZ( 0 ).Normal.Angle( direction.Forward.WithZ( 0 ).Normal );
+
+			if ( relativeAngle <= DamageCone / 2 )
+				enemy.Damage( Damage );
+		}
+
+		return closestEnemy;
+	}
+
+	protected UnitInfo SingleDamage()
+	{
+		var allEnemies = Scene.GetAllComponents<UnitInfo>()
+			.Where( x => UnitInfo.EnemyUnitTypes.Contains( x.UnitType ) )
+			.Where( x => x.Transform.Position.Distance( Transform.Position ) <= MaxRange );
+
+		var closestEnemy = allEnemies.OrderBy( x => x.GameObject.Transform.Position.Distance( Transform.Position ) )
+			.FirstOrDefault();
+
+		if ( closestEnemy != null )
+		{
+			var direction = Rotation.LookAt( closestEnemy.Transform.Position.WithZ( 0 ) - Transform.Position.WithZ( 0 ), Vector3.Up );
+			var relativeAngle = Transform.Rotation.Forward.WithZ( 0 ).Normal.Angle( direction.Forward.WithZ( 0 ).Normal );
+
+			if ( relativeAngle <= DamageCone / 2 )
+				closestEnemy.Damage( Damage );
+		}
+
+		return closestEnemy;
+	}
 }
