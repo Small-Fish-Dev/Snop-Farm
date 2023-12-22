@@ -32,6 +32,7 @@ public class PointAndShoot : Component
 	public Vector3 Nuzzle { get; set; }
 
 	public TimeSince LastShot { get; set; } = 0f;
+	public UnitInfo ClosestEnemy { get; set; }
 
 	protected override void DrawGizmos()
 	{
@@ -74,16 +75,16 @@ public class PointAndShoot : Component
 
 		if ( LastShot >= FiringRate )
 		{
-			var closestEnemy = AreaOfEffect ? AOEDamage() : SingleDamage();
-
-			if ( closestEnemy != null )
-			{
-				var goalRotation = Rotation.LookAt( closestEnemy.Transform.Position.WithZ( 0 ) - Transform.Position.WithZ( 0 ), Vector3.Up );
-				Transform.Rotation = RotateTowards( Transform.Rotation, goalRotation, RotatingSpeed * Time.Delta );
-			}
+			ClosestEnemy = AreaOfEffect ? AOEDamage() : SingleDamage();
 
 			LastShot = 0f;
-		}		
+		}
+
+		if ( ClosestEnemy != null )
+		{
+			var goalRotation = Rotation.LookAt( ClosestEnemy.Transform.Position.WithZ( 0 ) - Transform.Position.WithZ( 0 ), Vector3.Up );
+			Transform.Rotation = RotateTowards( Transform.Rotation, goalRotation, RotatingSpeed * Time.Delta );
+		}
 	}
 
 	// Thank you ShadowBrain!
