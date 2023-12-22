@@ -1,33 +1,6 @@
 {
   "GameObjects": [
     {
-      "Id": "f5c2e472-6f93-4928-b08c-921fef2d0857",
-      "Name": "Plane",
-      "Scale": "100,100,100",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "ModelRenderer",
-          "__enabled": true,
-          "BodyGroups": 18446744073709551615,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/dev/plane.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
-        },
-        {
-          "__type": "BoxCollider",
-          "__enabled": true,
-          "Center": "0,0,-0.5",
-          "IsTrigger": false,
-          "Scale": "100,100,1",
-          "Static": true,
-          "Surface": null
-        }
-      ]
-    },
-    {
       "Id": "7150f631-3a72-42fc-80bc-c2c9a3ee3c63",
       "Name": "Sun",
       "Position": "-310.0077,-298.0988,651.3469",
@@ -46,157 +19,31 @@
     {
       "Id": "673e500a-7c1d-4cef-aa2f-5722d0376011",
       "Name": "player",
-      "Position": "864.701,352.0158,0",
+      "Position": "-7.184204,-15.93533,-0.0004211222",
       "Tags": "player",
       "Enabled": true,
       "__Prefab": "prefabs/player.prefab"
     },
     {
-      "Id": "ea73dff4-6290-426a-8612-380f72d22d3f",
-      "Name": "snot",
-      "Position": "1632.246,486.499,0",
-      "Rotation": "0.0000000595712,-0.000000000000006054523,0.9994388,-0.03349635",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "d95ab763-42ce-46c4-8cd6-47a7e4e0e6ff",
-      "Name": "snot (1)",
-      "Position": "1507.91,365.0057,0",
-      "Rotation": "0.00000005950518,-0.000000000000006334239,0.9983311,0.05774901",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "ef89d4be-9247-4d5f-b784-32442c620c60",
-      "Name": "snot (2)",
-      "Position": "1500.679,714.246,-0.00001355781",
-      "Rotation": "0.00000005950518,-0.000000000000006334239,0.9983311,0.05774901",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "66a8529d-6325-4f92-804d-1e619915ebb7",
-      "Name": "snot (3)",
-      "Position": "1203.349,772.0251,0.00004016673",
-      "Rotation": "0.00000005950518,-0.000000000000006334239,0.9983311,0.05774901",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "01783fb6-0bf0-4083-a304-3bf6f260d58e",
-      "Name": "snot (4)",
-      "Position": "887.7943,815.5824,0.0001658433",
-      "Rotation": "0.00000005950518,-0.000000000000006334239,0.9983311,0.05774901",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "4eac8f48-4634-4c18-a118-fcdb047d3cf5",
-      "Name": "snot (5)",
-      "Position": "661.2032,604.0019,0.000134585",
-      "Rotation": "0.00000005950518,-0.000000000000006334239,0.9983311,0.05774901",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "6440ed2c-3ffb-4770-bd81-178497c7b690",
-      "Name": "snot (6)",
-      "Position": "1309.255,-152.3422,0.00004581257",
-      "Rotation": "0.00000005950518,-0.000000000000006334239,0.9983311,0.05774901",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "1456065a-5487-4819-8883-4132b41e6940",
-      "Name": "snot (7)",
-      "Position": "977.8782,-220.6495,0.000103865",
-      "Rotation": "0.00000005950518,-0.000000000000006334239,0.9983311,0.05774901",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "6b9e1857-0afb-4482-8890-493e26181d3b",
-      "Name": "snot",
-      "Position": "1631.176,286.2801,0",
-      "Rotation": "0.00000005959723,0.00000000000000144111,0.9998754,0.01578587",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "dc9e9b64-72b6-4a24-a103-e98ce3a155da",
-      "Name": "snot",
-      "Position": "1570.134,145.0517,0",
-      "Rotation": "0.00000005641885,0.00000000000000345814,0.9465512,0.322554",
-      "Scale": "2,2,2",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "98f2c786-06ba-4904-8a57-20f2cf37ae96",
-      "Name": "Plane",
-      "Position": "570.4523,88.61359,18.41823",
-      "Rotation": "-0.216584,0,0,0.9762642",
-      "Scale": "2,2.200003,1",
+      "Id": "71994143-e6ca-435d-a2be-1de6e28c2af7",
+      "Name": "Map",
+      "Position": "-119.233,276.1599,294.9459",
       "Enabled": true,
       "Components": [
         {
-          "__type": "ModelRenderer",
+          "__type": "MapInstance",
           "__enabled": true,
-          "BodyGroups": 18446744073709551615,
-          "MaterialGroup": null,
-          "MaterialOverride": null,
-          "Model": "models/dev/plane.vmdl",
-          "RenderType": "On",
-          "Tint": "1,1,1,1"
+          "MapName": "debug"
         },
         {
-          "__type": "BoxCollider",
+          "__type": "MapCollider",
           "__enabled": true,
-          "Center": "0,0,-1.900022",
           "IsTrigger": false,
-          "Scale": "99.09992,100.2,3.300024",
-          "Static": false,
-          "Surface": null
+          "Static": true,
+          "Surface": "surfaces/concrete.surface"
         }
-      ]
-    },
-    {
-      "Id": "dbf7c096-e96c-40f8-a7fe-bdda8336f0f0",
-      "Name": "turret",
-      "Position": "1234.332,255.271,-0.00001525879",
-      "Enabled": true,
-      "__Prefab": "prefabs/pistol_turret.prefab"
-    },
-    {
-      "Id": "6241888c-b848-49bc-b382-a30a56fb5e1d",
-      "Name": "turret",
-      "Position": "1238.942,435.7418,0",
-      "Enabled": true,
-      "__Prefab": "prefabs/pistol_turret.prefab"
-    },
-    {
-      "Id": "1dd8854f-ef53-4f95-bb11-93d30f88dd32",
-      "Name": "smg_turret",
-      "Position": "975.5427,338.6859,1",
-      "Enabled": true,
-      "__Prefab": "prefabs/smg_turret.prefab"
-    },
-    {
-      "Id": "cb98bb3c-2dfa-44b9-86b1-22f5bbd7562d",
-      "Name": "electric_turret",
-      "Position": "885.8595,232.5735,1",
-      "Enabled": true,
-      "__Prefab": "prefabs/electric_turret.prefab"
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {
