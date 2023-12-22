@@ -75,7 +75,7 @@ public class MultiplyPrefab : Component
 			var verticalTrace = Scene.Trace.FromTo( midPos, endPos )
 				.Run();
 
-			if ( !verticalTrace.Hit || verticalTrace.GameObject.Tags.Has( "Unit" ) ) continue;
+			if ( !verticalTrace.Hit || verticalTrace.GameObject != null && verticalTrace.GameObject.Tags.Has( "Unit" ) ) continue;
 
 			SpawnPrefab( verticalTrace.HitPosition );
 			return;
