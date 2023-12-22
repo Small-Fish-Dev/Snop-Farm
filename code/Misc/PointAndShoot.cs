@@ -34,6 +34,25 @@ public class PointAndShoot : Component
 	{
 		if ( Gizmo.IsSelected )
 		{
+			using ( Gizmo.Scope( "donut", Transform.Position, Transform.Rotation * Rotation.FromPitch( 90f ) ) )
+			{
+				Gizmo.GizmoDraw draw = Gizmo.Draw;
+
+				draw.SolidCircle( 0f, MaxRange, -DamageCone / 2f, DamageCone, (int)(DamageCone) ); // Display range and damage cone
+
+				draw.SolidRing( Vector3.Backward * Nuzzle.z, Nuzzle.x - 1f, Nuzzle.x + 1f, sections: 24 ); // Outer rotation ring
+			}
+
+			Gizmo.GizmoDraw draw2 = Gizmo.Draw;
+
+			var rotationSpeed = Rotation.FromYaw( RealTime.Now * RotatingSpeed );
+			draw2.LineThickness = 10f;
+			draw2.Line( Vector3.Up * Nuzzle.z - rotationSpeed.Forward * Nuzzle.x, Vector3.Up * Nuzzle.z + rotationSpeed.Forward * Nuzzle.x ); // Display rotation speed
+
+			var firingSpeed = RealTime.Now % FiringRate;
+			if ( firingSpeed <= FiringRate / 2f )
+				draw2.SolidCone( Transform.Rotation * Nuzzle + Vector3.Forward * 16f, Vector3.Backward * 16f, 5 ); // Display firing rate
+			/*
 			Gizmo.GizmoDraw draw = Gizmo.Draw;
 
 			draw.LineThickness = 10f;
@@ -51,7 +70,7 @@ public class PointAndShoot : Component
 			if ( firingSpeed <= FiringRate / 2f )
 				draw.SolidCone( Nuzzle + Vector3.Forward * 16f, Vector3.Backward * 16f, 5 );
 
-			draw.LineCircle( Nuzzle, 5f );
+			draw.LineCircle( Nuzzle, 5f );*/
 		}
 	}
 
