@@ -24,7 +24,7 @@ public class MultiplyPrefab : Component
 	{
 		if ( Gizmo.IsSelected )
 		{
-			using ( Gizmo.Scope( "donut", Transform.Position, Transform.Rotation * Rotation.FromPitch( 90f ) ) )
+			using ( Gizmo.Scope( "donut", 0, Transform.Rotation * Rotation.FromPitch( 90f ) ) )
 			{
 				Gizmo.GizmoDraw draw = Gizmo.Draw;
 

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "c28dff48-2d6a-457d-a3ca-9b9134d0c232",
+    "Id": "6c19ca03-6ba3-481c-af2c-3530dc50d082",
     "Name": "snot",
     "Scale": "2,2,2",
     "Enabled": true,
@@ -36,16 +36,17 @@
         ],
         "Health": 5,
         "HurtInvulnerabilityTimer": 0.2,
-        "Renderer": "c28dff48-2d6a-457d-a3ca-9b9134d0c232",
+        "Renderer": "6c19ca03-6ba3-481c-af2c-3530dc50d082",
         "UnitType": "Slime"
       },
       {
         "__type": "MultiplyPrefab",
         "__enabled": true,
         "MaxDistance": 90,
+        "MaxTimeBetweenAttempts": 8,
         "MinDistance": 60,
-        "PrefabToSpawn": "prefabs/snot.prefab",
-        "TimeBetweenAttempts": 2
+        "MinTimeBetweenAttempts": 4,
+        "PrefabToSpawn": "prefabs/snot.prefab"
       }
     ]
   },

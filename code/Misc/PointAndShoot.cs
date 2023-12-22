@@ -34,7 +34,7 @@ public class PointAndShoot : Component
 	{
 		if ( Gizmo.IsSelected )
 		{
-			using ( Gizmo.Scope( "donut", Transform.Position, Transform.Rotation * Rotation.FromPitch( 90f ) ) )
+			using ( Gizmo.Scope( "donut", 0, Rotation.FromPitch( 90f ) ) )
 			{
 				Gizmo.GizmoDraw draw = Gizmo.Draw;
 
@@ -51,7 +51,7 @@ public class PointAndShoot : Component
 
 			var firingSpeed = RealTime.Now % FiringRate;
 			if ( firingSpeed <= FiringRate / 2f )
-				draw2.SolidCone( Transform.Rotation * Nuzzle + Vector3.Forward * 16f, Vector3.Backward * 16f, 5 ); // Display firing rate
+				draw2.SolidCone( Nuzzle + Vector3.Forward * 16f, Vector3.Backward * 16f, 5 ); // Display firing rate
 			/*
 			Gizmo.GizmoDraw draw = Gizmo.Draw;
 

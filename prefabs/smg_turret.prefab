@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "69e23b31-dfcf-453d-aea5-2bc4d87be93b",
+    "Id": "3b8ba041-1ee8-48ca-bfad-7cbf19089783",
     "Name": "smg_turret",
     "Enabled": true,
     "Components": [
@@ -43,7 +43,7 @@
         "MaxRange": 350,
         "Nuzzle": "25.6,0,37.69999",
         "RotatingSpeed": 120,
-        "UnitInfo": "69e23b31-dfcf-453d-aea5-2bc4d87be93b"
+        "UnitInfo": "3b8ba041-1ee8-48ca-bfad-7cbf19089783"
       }
     ]
   },
