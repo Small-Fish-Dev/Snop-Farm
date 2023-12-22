@@ -12,9 +12,10 @@ public class UnitInfo : Component
 	[Property]
 	public List<UnitType> EnemyUnitTypes { get; set; }
 
-	[Property]
-	public float HurtInvulnerabilityTimer { get; set; } = 0.15f;
+	public float LastDamage { get; set; } = 0;
+	public float HurtAnimationDuration => LastDamage / 10f;
 	public TimeSince LastHurt { get; set; } = float.MaxValue;
+	public bool HurtAnimation => LastHurt != float.MaxValue && LastHurt <= HurtAnimationDuration;
 
 
 	protected override void OnStart()
@@ -29,10 +30,10 @@ public class UnitInfo : Component
 	{
 		base.OnUpdate();
 
-		if ( LastHurt < HurtInvulnerabilityTimer )
+		if ( HurtAnimation )
 		{
 			var extraScale = 0.1f;
-			var animationTime = MathX.Remap( LastHurt, 0f, HurtInvulnerabilityTimer, 0f, 1f );
+			var animationTime = MathX.Remap( LastHurt, 0f, HurtAnimationDuration, 0f, 1f );
 			var sinScale = (float)Math.Sin( animationTime * Math.PI );
 			Transform.Scale = _oldScale * (1f + sinScale * extraScale);
 		}
@@ -40,16 +41,17 @@ public class UnitInfo : Component
 
 	private Vector3 _oldScale = Vector3.One;
 	private float _currentScale = 1f;
-	public async void Damage( float amount )
+	public void Damage( float amount )
 	{
-		if ( LastHurt <= HurtInvulnerabilityTimer ) return;
-
-		await HurtFX();
-
 		Health = Math.Max( Health - amount, 0 );
+
+		HurtFX();
 
 		if ( Health <= 0 )
 			Kill();
+
+		LastDamage = amount;
+		LastHurt = 0f;
 	}
 
 	public virtual void Kill()
@@ -57,22 +59,23 @@ public class UnitInfo : Component
 		GameObject.Destroy();
 	}
 
-	private async Task HurtFX()
+	private async void HurtFX()
 	{
-		_oldScale = Transform.Scale;
-		LastHurt = 0f;
+		_oldScale = HurtAnimation ? _oldScale : Transform.Scale;
 
 		Color oldColor = Color.White;
 
 		if ( Renderer != null )
 		{
-			oldColor = Renderer.Tint;
+			oldColor = HurtAnimation ? oldColor : Renderer.Tint;
 			Renderer.Tint = Color.Red;
 		}
 
-		await GameTask.DelayRealtimeSeconds( HurtInvulnerabilityTimer );
+		await GameTask.DelayRealtimeSeconds( HurtAnimationDuration );
 
 		if ( Renderer != null )
 			Renderer.Tint = oldColor;
+
+		Transform.Scale = _oldScale;
 	}
 }
