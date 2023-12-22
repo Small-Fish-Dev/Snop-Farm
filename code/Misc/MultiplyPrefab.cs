@@ -24,11 +24,12 @@ public class MultiplyPrefab : Component
 	{
 		if ( Gizmo.IsSelected )
 		{
-			Gizmo.GizmoDraw draw = Gizmo.Draw;
+			using ( Gizmo.Scope( "donut", Transform.Position, Transform.Rotation * Rotation.FromPitch( 90f ) ) )
+			{
+				Gizmo.GizmoDraw draw = Gizmo.Draw;
 
-			draw.LineThickness = 5f;
-			draw.LineCircle( 0f, Vector3.Up, MinDistance, 0f, 360f, 40 );
-			draw.LineCircle( 0f, Vector3.Up, MaxDistance, 0f, 360f, 40 );
+				draw.SolidRing( 0, MinDistance, MaxDistance, sections: 30 ); // Display spawning distance
+			}
 		}
 	}
 
