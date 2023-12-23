@@ -115,6 +115,13 @@
       "Scale": "2,2,2",
       "Enabled": true,
       "__Prefab": "prefabs/snot.prefab"
+    },
+    {
+      "Id": "8cffc563-a418-482b-86c6-d35e473abfa5",
+      "Name": "hud",
+      "Position": "160.8145,134.2608,256",
+      "Enabled": true,
+      "__Prefab": "prefabs/hud.prefab"
     }
   ],
   "SceneProperties": {

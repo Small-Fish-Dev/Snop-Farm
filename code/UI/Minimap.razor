@@ -1,0 +1,86 @@
+@using Sandbox;
+@using Sandbox.UI
+
+@inherits Panel
+
+<root>
+    <scenepanel class="scene" @ref="scene" />
+</root>
+
+@code {
+    public static Minimap Instance { get; private set; }
+    private float size = 1024f;
+    public float Size {
+        get => size;
+        set {
+            size = value;
+            if( Camera != null )
+                Camera.OrthoHeight = size;
+        }
+    }
+    
+    public Vector3 Position { get; set; }
+    public float Rotation { get; set; }
+    public SceneCamera? Camera => scene?.Camera;
+
+    private ScenePanel scene;
+
+    public Minimap()
+    {
+        // Let's store a static reference for our minimap so that we can access it in a character controller.
+        Instance = this;
+    }
+
+    private void RenderCamera()
+    {
+        var attributes = new RenderAttributes();
+        var shader = Material.FromShader( "shaders/minimap.shader" );
+        Graphics.Blit( shader, attributes );
+    }
+
+    protected override void OnAfterTreeRender( bool firstTime )
+	{
+		base.OnAfterTreeRender( firstTime );
+
+		if ( !firstTime )
+            return;
+
+		// Initialize the SceneCamera. 
+        Camera.World = Sandbox.Camera.Main?.World;
+
+        Camera.OnRenderPostProcess = RenderCamera;
+        Camera.ZNear = 0.1f;
+        Camera.ZFar = 500;
+
+        Camera.ExcludeTags.Add( "player" );
+        Camera.ExcludeTags.Add( "unit" );
+
+        Camera.Size = 512f;
+        Camera.Ortho = true;
+        Camera.OrthoWidth = Size;
+        Camera.OrthoHeight = Size;
+
+	}
+
+    // Update our camera in tick.
+    public override void Tick()
+    {
+        if ( Camera == null )
+            return;
+
+        Camera.Position = Position.WithZ( 0 ) + Vector3.Up * Camera.ZFar / 2f;
+        Camera.Rotation = global::Rotation.From( 90, Rotation, 0 );
+    }
+}
+
+<style>
+    Minimap {        
+        .scene {
+            position: absolute;
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+        }
+    }
+</style>

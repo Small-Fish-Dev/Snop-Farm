@@ -44,6 +44,15 @@ public class SnotPlayer : Component
 		if ( LastPunch >= PunchCooldown * 4f )
 			if ( CitizenAnimation != null )
 				CitizenAnimation.HoldType = CitizenAnimationHelper.HoldTypes.None;
+
+		// Update minimap.
+		var minimap = Minimap.Instance;
+		var camera = Controller.Camera;
+		if ( minimap == null || camera == null )
+			return;
+
+		minimap.Position = GameObject.Transform.Position;
+		minimap.Rotation = camera.Transform.Rotation.Yaw();
 	}
 
 	public void Punch()

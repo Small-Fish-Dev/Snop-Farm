@@ -1,0 +1,25 @@
+{
+  "RootObject": {
+    "Id": "2ef551e2-0a78-4bd6-a990-7c543f076df6",
+    "Name": "hud",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ScreenPanel",
+        "__enabled": true,
+        "AutoScreenScale": true,
+        "Opacity": 1,
+        "Scale": 1,
+        "ZIndex": 100
+      },
+      {
+        "__type": "HUD",
+        "__enabled": true
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": []
+}
