@@ -4,23 +4,85 @@
 @inherits Panel
 
 <root>
+    <!-- The ScenePanel that renders our minimap's camera. -->
     <scenepanel class="scene" @ref="scene" />
+
+    <!-- Render all units within our active scene. -->
+    @foreach( var unit in GameManager.ActiveScene.GetAllComponents<UnitInfo>() )
+    {
+        var obj = unit.GameObject;
+        var position = this.Camera.ToScreen( obj.Transform.LocalPosition.WithZ( -Size + Camera.ZFar ) ) * ScaleFromScreen;
+        
+        <div 
+            class="unit @(unit.UnitType.ToString().ToLower())" 
+            style="left: @(position.x)px; top: @(position.y)px;"
+        />
+    }
 </root>
 
 @code {
     public static Minimap Instance { get; private set; }
-    private float size = 1024f;
+    
+    /// <summary>
+    /// The Zoom amount of the Minimap.
+    /// </summary>
+    /// <value></value>
     public float Size {
         get => size;
-        set {
+        set 
+        {
             size = value;
             if( Camera != null )
+            {
+                Camera.OrthoWidth = size;
                 Camera.OrthoHeight = size;
+            }
         }
     }
+    private float size = 2048f;
+
+    /// <summary>
+    /// Resolution of the SceneCamera's output.
+    /// </summary>
+    /// <value></value>
+    public float Resolution {
+        get => resolution;
+        set 
+        {
+            resolution = value;
+            if ( Camera != null )
+                Camera.Size = resolution;
+        }
+    }
+    private float resolution = 256f;
+
+    /// <summary>
+    /// The color of the floor on the Minimap.
+    /// </summary>
+    /// <value></value>
+    public Color Floor { get; set; } = Color.Gray;
+
+    /// <summary>
+    /// The color of the walls on the Minimap.
+    /// </summary>
+    /// <value></value>
+    public Color Outline { get; set; } = Color.White;
     
+    /// <summary>
+    /// Position of the Minimap's SceneCamera.
+    /// </summary>
+    /// <value></value>
     public Vector3 Position { get; set; }
+
+    /// <summary>
+    /// Rotation of the Minimap's SceneCamera.
+    /// </summary>
+    /// <value></value>
     public float Rotation { get; set; }
+
+    /// <summary>
+    /// Reference to the Minimap's SceneCamera.
+    /// </summary>
     public SceneCamera? Camera => scene?.Camera;
 
     private ScenePanel scene;
@@ -33,7 +95,11 @@
 
     private void RenderCamera()
     {
+        // Handle shader post processign for the camera.
         var attributes = new RenderAttributes();
+        attributes.Set( "FloorColor", Floor );
+        attributes.Set( "OutlineColor", Outline );
+
         var shader = Material.FromShader( "shaders/minimap.shader" );
         Graphics.Blit( shader, attributes );
     }
@@ -46,20 +112,19 @@
             return;
 
 		// Initialize the SceneCamera. 
-        Camera.World = Sandbox.Camera.Main?.World;
+        Camera.World = GameManager.ActiveScene?.SceneWorld;
 
         Camera.OnRenderPostProcess = RenderCamera;
-        Camera.ZNear = 0.1f;
-        Camera.ZFar = 500;
+        Camera.ZNear = 0.5f;
+        Camera.ZFar = 1500;
 
         Camera.ExcludeTags.Add( "player" );
         Camera.ExcludeTags.Add( "unit" );
 
-        Camera.Size = 512f;
+        Camera.Size = Resolution;
         Camera.Ortho = true;
         Camera.OrthoWidth = Size;
         Camera.OrthoHeight = Size;
-
 	}
 
     // Update our camera in tick.
@@ -71,16 +136,42 @@
         Camera.Position = Position.WithZ( 0 ) + Vector3.Up * Camera.ZFar / 2f;
         Camera.Rotation = global::Rotation.From( 90, Rotation, 0 );
     }
+
+    protected override int BuildHash() => Time.Now.GetHashCode();
 }
 
 <style>
-    Minimap {        
+    Minimap {
+        overflow: hidden;
+
         .scene {
             position: absolute;
             left: 0px;
             top: 0px;
             width: 100%;
             height: 100%;
+        }
+
+        .unit {
+            position: absolute;
+            width: 15px; 
+            aspect-ratio: 1;
+            border-radius: 50%;
+            transform: translate(-50% -50%); 
+
+            &.player {
+                background-color: yellow;
+                z-index: 3;
+            }
+
+            &.turret {
+                background-color: blue;
+                z-index: 2;
+            }
+
+            &.slime {
+                background-color: green;
+            }
         }
     }
 </style>

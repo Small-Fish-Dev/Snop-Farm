@@ -46,11 +46,19 @@ PS
     #define DEPTH_STATE_ALREADY_SET
     #include "vr_common_ps_code.fxc"
 
+    float4 g_flFloorColor < Attribute( "FloorColor" ); >;
+	float4 g_flOutlineColor < Attribute( "OutlineColor" ); >;
+
     float4 MainPs( PS_INPUT i ) : SV_Target0
     { 	
         float depth = Depth::GetNormalized( i.vPositionSs.xy );
-        float vis = 1 - floor(depth);
+        float alpha = 1 - floor(depth);
+        float3 floor_color = g_flFloorColor.rgb * alpha;
 
-        return vis;
+        // Calculate color by threshold.
+        const float THRESHOLD = 0.4;
+        float3 result = lerp(floor_color, g_flOutlineColor.rgb, ceil(THRESHOLD - depth));
+
+        return float4(result, alpha);
     }
 }
