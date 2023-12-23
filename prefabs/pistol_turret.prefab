@@ -1,7 +1,7 @@
 {
   "RootObject": {
-    "Id": "69e23b31-dfcf-453d-aea5-2bc4d87be93b",
-    "Name": "turret",
+    "Id": "dc9ba25f-af5f-4138-9475-f80a4080da06",
+    "Name": "pistol_turret",
     "Enabled": true,
     "Components": [
       {
@@ -21,7 +21,6 @@
           "Slime"
         ],
         "Health": 5,
-        "HurtInvulnerabilityTimer": 0.15,
         "Renderer": null,
         "UnitType": "Turret"
       },
@@ -37,13 +36,15 @@
       {
         "__type": "PointAndShoot",
         "__enabled": true,
+        "AreaOfEffect": false,
         "Damage": 1,
         "DamageCone": 15,
         "FiringRate": 0.5,
         "MaxRange": 250,
-        "Nuzzle": "25.6,0,37.69999",
+        "Muzzle": "0,-14.2,22.19999",
+        "MuzzleFX": null,
         "RotatingSpeed": 40,
-        "UnitInfo": "69e23b31-dfcf-453d-aea5-2bc4d87be93b"
+        "UnitInfo": "dc9ba25f-af5f-4138-9475-f80a4080da06"
       }
     ]
   },

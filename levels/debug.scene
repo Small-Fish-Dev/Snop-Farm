@@ -107,6 +107,14 @@
       "Position": "138.264,-780.3425,1.000061",
       "Enabled": true,
       "__Prefab": "prefabs/electric_turret.prefab"
+    },
+    {
+      "Id": "693f9d0e-bdf1-4f18-93b8-c913c3abf5fe",
+      "Name": "snot",
+      "Position": "598.8627,-203.6431,0",
+      "Scale": "2,2,2",
+      "Enabled": true,
+      "__Prefab": "prefabs/snot.prefab"
     }
   ],
   "SceneProperties": {

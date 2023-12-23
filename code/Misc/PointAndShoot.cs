@@ -29,33 +29,43 @@ public class PointAndShoot : Component
 	public bool AreaOfEffect { get; set; } = false;
 
 	[Property]
-	public Vector3 Nuzzle { get; set; }
+	public Vector3 Muzzle { get; set; }
+
+	[Property]
+	public ParticleSystem MuzzleFX { get; set; }
 
 	public TimeSince LastShot { get; set; } = 0f;
 	public UnitInfo ClosestEnemy { get; set; }
+
+	TimeSince _lastFxMuzzle = 0;
 
 	protected override void DrawGizmos()
 	{
 		if ( Gizmo.IsSelected )
 		{
+			Gizmo.GizmoDraw draw = Gizmo.Draw;
+
 			using ( Gizmo.Scope( "donut", 0, Rotation.FromPitch( 90f ) ) )
 			{
-				Gizmo.GizmoDraw draw = Gizmo.Draw;
-
 				draw.SolidCircle( 0f, MaxRange, -DamageCone / 2f, DamageCone, (int)(DamageCone) ); // Display range and damage cone
 
-				draw.SolidRing( Vector3.Backward * Nuzzle.z, Nuzzle.x - 1f, Nuzzle.x + 1f, sections: 24 ); // Outer rotation ring
+				draw.SolidRing( Vector3.Backward * Muzzle.z, Muzzle.x - 1f, Muzzle.x + 1f, sections: 24 ); // Outer rotation ring
+			}
+			var rotationSpeed = Rotation.FromYaw( RealTime.Now * RotatingSpeed );
+			draw.LineThickness = 10f;
+			draw.Line( Vector3.Up * Muzzle.z - rotationSpeed.Forward * Muzzle.x, Vector3.Up * Muzzle.z + rotationSpeed.Forward * Muzzle.x ); // Display rotation speed
+
+			if ( _lastFxMuzzle >= FiringRate )
+			{
+				if ( MuzzleFX != null )
+				{
+					draw.Particles( MuzzleFX.ResourcePath, Transform.World.WithPosition( Muzzle ) );
+				}
+
+				_lastFxMuzzle = 0;
 			}
 
-			Gizmo.GizmoDraw draw2 = Gizmo.Draw;
 
-			var rotationSpeed = Rotation.FromYaw( RealTime.Now * RotatingSpeed );
-			draw2.LineThickness = 10f;
-			draw2.Line( Vector3.Up * Nuzzle.z - rotationSpeed.Forward * Nuzzle.x, Vector3.Up * Nuzzle.z + rotationSpeed.Forward * Nuzzle.x ); // Display rotation speed
-
-			var firingSpeed = RealTime.Now % FiringRate;
-			if ( firingSpeed <= FiringRate / 2f )
-				draw2.SolidCone( Nuzzle + Vector3.Forward * 16f, Vector3.Backward * 16f, 5 ); // Display firing rate
 		}
 	}
 
@@ -111,6 +121,13 @@ public class PointAndShoot : Component
 
 			if ( relativeAngle <= DamageCone / 2 )
 				enemy.Damage( Damage );
+		}
+
+		if ( MuzzleFX != null )
+		{
+			var muzzleParticle = new SceneParticles( Scene.SceneWorld, MuzzleFX );
+			muzzleParticle.Position = Transform.World.PointToWorld( Muzzle );
+			Log.Info( "Hi" );
 		}
 
 		return closestEnemy;
