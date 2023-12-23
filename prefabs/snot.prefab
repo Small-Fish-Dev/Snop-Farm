@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "6c19ca03-6ba3-481c-af2c-3530dc50d082",
+    "Id": "84f3e366-0e94-403f-a6f8-67043abb04bf",
     "Name": "snot",
     "Scale": "2,2,2",
     "Enabled": true,
@@ -35,8 +35,10 @@
           "NPC"
         ],
         "Health": 5,
-        "HurtInvulnerabilityTimer": 0.06,
-        "Renderer": "6c19ca03-6ba3-481c-af2c-3530dc50d082",
+        "HurtAnimationVariable": "hit",
+        "MinScale": 0.2,
+        "Renderer": "84f3e366-0e94-403f-a6f8-67043abb04bf",
+        "ScaleByHealth": true,
         "UnitType": "Slime"
       },
       {
