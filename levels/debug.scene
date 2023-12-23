@@ -25,27 +25,6 @@
       "__Prefab": "prefabs/player.prefab"
     },
     {
-      "Id": "71994143-e6ca-435d-a2be-1de6e28c2af7",
-      "Name": "Map",
-      "Position": "-119.233,276.1599,294.9459",
-      "Enabled": true,
-      "Components": [
-        {
-          "__type": "MapInstance",
-          "__enabled": true,
-          "MapName": "debug"
-        },
-        {
-          "__type": "MapCollider",
-          "__enabled": true,
-          "IsTrigger": false,
-          "Static": true,
-          "Surface": "surfaces/concrete.surface"
-        }
-      ],
-      "Children": []
-    },
-    {
       "Id": "dc9ba25f-af5f-4138-9475-f80a4080da06",
       "Name": "turret",
       "Position": "295.0073,-204.1895,0",
@@ -122,6 +101,26 @@
       "Position": "160.8145,134.2608,256",
       "Enabled": true,
       "__Prefab": "prefabs/hud.prefab"
+    },
+    {
+      "Id": "68ac688a-aa26-4bfd-8fb6-954fd01f3b1a",
+      "Name": "Map",
+      "Enabled": true,
+      "Components": [
+        {
+          "__type": "MapInstance",
+          "__enabled": true,
+          "MapName": "debug"
+        },
+        {
+          "__type": "MapCollider",
+          "__enabled": true,
+          "IsTrigger": false,
+          "Static": false,
+          "Surface": null
+        }
+      ],
+      "Children": []
     }
   ],
   "SceneProperties": {

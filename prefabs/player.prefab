@@ -40,8 +40,10 @@
           "Slime"
         ],
         "Health": 10,
-        "HurtInvulnerabilityTimer": 0.15,
+        "HurtAnimationVariable": "hit",
+        "MinScale": 0.2,
         "Renderer": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+        "ScaleByHealth": false,
         "UnitType": "Player"
       },
       {
@@ -53,7 +55,6 @@
         "Collider": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
         "CollisionHeight": 72,
         "CollisionRadius": 16,
-        "Deceleration": 0,
         "EnableUnstuck": true,
         "Gravity": "0,0,850",
         "GroundAngle": 45,
