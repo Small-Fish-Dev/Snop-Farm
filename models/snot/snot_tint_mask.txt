@@ -1,0 +1,5 @@
+"settings"
+{
+	"maxres"		"512"
+	"brightness_offset"		"0.050000"
+}

@@ -1,0 +1,297 @@
+<!-- kv3 encoding:text:version{e21c7f3c-8a33-41c5-9977-a76d3a32aa0d} format:modeldoc29:version{3cec427c-1b0e-4d48-a90a-0436f33a6041} -->
+{
+	rootNode = 
+	{
+		_class = "RootNode"
+		children = 
+		[
+			{
+				_class = "MaterialGroupList"
+				children = 
+				[
+					{
+						_class = "DefaultMaterialGroup"
+						name = "Snot_Tint"
+						remaps = 
+						[
+							{
+								from = "snot.vmat"
+								to = "models/snot/snot_tint.vmat"
+							},
+						]
+						use_global_default = false
+						global_default_material = ""
+					},
+					{
+						_class = "MaterialGroup"
+						name = "Snot"
+						remaps = 
+						[
+							{
+								from = "models/snot/snot_tint.vmat"
+								to = "models/snot/snot.vmat"
+							},
+						]
+					},
+				]
+			},
+			{
+				_class = "PhysicsShapeList"
+				children = 
+				[
+					{
+						_class = "PhysicsHullFromRender"
+						parent_bone = "snot"
+						surface_prop = "mud"
+						collision_tags = "solid"
+						faceMergeAngle = 5.0
+						maxHullVertices = 12
+					},
+				]
+			},
+			{
+				_class = "RenderMeshList"
+				children = 
+				[
+					{
+						_class = "RenderMeshFile"
+						filename = "models/snot/snot.dmx"
+						import_translation = [ 0.0, 0.0, 0.0 ]
+						import_rotation = [ 0.0, 0.0, 0.0 ]
+						import_scale = 1.0
+						align_origin_x_type = "None"
+						align_origin_y_type = "None"
+						align_origin_z_type = "None"
+						parent_bone = ""
+						import_filter = 
+						{
+							exclude_by_default = false
+							exception_list = [  ]
+						}
+					},
+				]
+			},
+			{
+				_class = "AnimationList"
+				children = 
+				[
+					{
+						_class = "AnimFile"
+						name = "pulse"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/snot/pulse.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 8.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "growth"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/snot/growth.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = 16.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "snot"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/snot/snot.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "idle"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = true
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/snot/idle.dmx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "flinch"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/snot/flinch.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+					{
+						_class = "AnimFile"
+						name = "retreat"
+						activity_name = ""
+						activity_weight = 1
+						weight_list_name = ""
+						fade_in_time = 0.2
+						fade_out_time = 0.2
+						looping = false
+						delta = false
+						worldSpace = false
+						hidden = false
+						anim_markup_ordered = false
+						disable_compression = false
+						enable_scale = false
+						source_filename = "models/snot/retreat.fbx"
+						start_frame = -1
+						end_frame = -1
+						framerate = -1.0
+						take = 0
+						reverse = false
+					},
+				]
+				default_root_bone_name = ""
+			},
+			{
+				_class = "WeightListList"
+				children = 
+				[
+					{
+						_class = "WeightList"
+						name = "Quarter"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "snot"
+								weight = 0.0
+							},
+							{
+								bone = "wiggle"
+								weight = 0.204893
+							},
+						]
+						master_morph_weight = 0.201835
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "Half"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "snot"
+								weight = 0.0
+							},
+							{
+								bone = "wiggle"
+								weight = 0.470948
+							},
+						]
+						master_morph_weight = 0.470948
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "ThreeQuarter"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "snot"
+								weight = 0.0
+							},
+							{
+								bone = "wiggle"
+								weight = 0.752294
+							},
+						]
+						master_morph_weight = 0.752294
+						morph_weights = [  ]
+					},
+					{
+						_class = "WeightList"
+						name = "Full"
+						default_weight = 0.0
+						weights = 
+						[
+							{
+								bone = "snot"
+								weight = 0.0
+							},
+							{
+								bone = "wiggle"
+								weight = 1.0
+							},
+						]
+						master_morph_weight = 1.0
+						morph_weights = [  ]
+					},
+				]
+			},
+		]
+		model_archetype = "animated_model"
+		primary_associated_entity = "cycler"
+		anim_graph_name = "models/snot/snot.vanmgrph"
+		base_model_name = ""
+	}
+}
