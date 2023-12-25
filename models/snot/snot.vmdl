@@ -280,10 +280,10 @@
 							},
 							{
 								bone = "wiggle"
-								weight = 0.204893
+								weight = 0.10274
 							},
 						]
-						master_morph_weight = 0.201835
+						master_morph_weight = 0.10274
 						morph_weights = [  ]
 					},
 				]
