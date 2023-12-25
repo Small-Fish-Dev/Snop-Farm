@@ -270,7 +270,7 @@
 				[
 					{
 						_class = "WeightList"
-						name = "Quarter"
+						name = "Quarter_morph"
 						default_weight = 0.0
 						weights = 
 						[
@@ -284,60 +284,6 @@
 							},
 						]
 						master_morph_weight = 0.201835
-						morph_weights = [  ]
-					},
-					{
-						_class = "WeightList"
-						name = "Half"
-						default_weight = 0.0
-						weights = 
-						[
-							{
-								bone = "snot"
-								weight = 0.0
-							},
-							{
-								bone = "wiggle"
-								weight = 0.470948
-							},
-						]
-						master_morph_weight = 0.470948
-						morph_weights = [  ]
-					},
-					{
-						_class = "WeightList"
-						name = "ThreeQuarter"
-						default_weight = 0.0
-						weights = 
-						[
-							{
-								bone = "snot"
-								weight = 0.0
-							},
-							{
-								bone = "wiggle"
-								weight = 0.752294
-							},
-						]
-						master_morph_weight = 0.752294
-						morph_weights = [  ]
-					},
-					{
-						_class = "WeightList"
-						name = "Full"
-						default_weight = 0.0
-						weights = 
-						[
-							{
-								bone = "snot"
-								weight = 0.0
-							},
-							{
-								bone = "wiggle"
-								weight = 1.0
-							},
-						]
-						master_morph_weight = 1.0
 						morph_weights = [  ]
 					},
 				]
