@@ -31,9 +31,22 @@
         "Health": 5,
         "HealthAmountAnimation": "health",
         "HitAnimation": "hit",
-        "MinScale": 0.2,
+        "HurtAnimation": {
+          "rangex": "0,0.2",
+          "rangey": "0,0.5",
+          "frames": [
+            {},
+            {
+              "x": 0.5,
+              "y": 1
+            },
+            {
+              "x": 1
+            }
+          ]
+        },
+        "HurtColor": "1,0,0,1",
         "Renderer": "84f3e366-0e94-403f-a6f8-67043abb04bf",
-        "ScaleByHealth": false,
         "UnitType": "Slime"
       },
       {

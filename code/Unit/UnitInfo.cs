@@ -7,15 +7,22 @@ public class UnitInfo : Component
 	public UnitType UnitType { get; set; } = UnitType.None;
 
 	[Property]
-	public bool ScaleByHealth { get; set; } = false;
+	public Curve HurtAnimation { get; set; }
 
-	[Range( 0f, 1f, 0.1f )]
-	[ShowIf( "ScaleByHealth", true )]
 	[Property]
-	public float MinScale { get; set; } = 0.2f;
+	public Color HurtColor { get; set; } = Color.Red;
+
+	[Property]
+	public float HurtScale { get; set; } = 1.5f;
+
+	public float LastDamage { get; set; } = 0;
+	public TimeSince LastHurt { get; set; } = float.MaxValue;
+	public bool IsHurtAnimating => LastHurt != float.MaxValue && LastHurt <= HurtAnimation.TimeRange.y;
 
 	[Property]
 	public bool FadeIn { get; set; } = false;
+	private float _fadeAnimation = 0.3f;
+	public bool IsFadingIn => FadeIn && SinceSpawned <= _fadeAnimation; // Duration of fadein, no reason to make it editable.
 
 	[Property]
 	public ModelRenderer Renderer { get; set; }
@@ -35,13 +42,10 @@ public class UnitInfo : Component
 	[Property]
 	public List<UnitType> EnemyUnitTypes { get; set; }
 
-	public float LastDamage { get; set; } = 0;
-	public float HurtAnimationDuration => Math.Max( LastDamage / 5f, 0.1f );
-	public TimeSince LastHurt { get; set; } = float.MaxValue;
-	public bool HurtAnimation => LastHurt != float.MaxValue && LastHurt <= HurtAnimationDuration;
+	public Color OriginalTint;
 	public float MaxHealth;
 	public Vector3 MaxScale;
-
+	public TimeSince SinceSpawned;
 
 	protected override void OnStart()
 	{
@@ -52,22 +56,28 @@ public class UnitInfo : Component
 
 		MaxHealth = Health;
 		MaxScale = Transform.Scale;
+		SinceSpawned = 0;
 
 		if ( Renderer != null )
+		{
+			OriginalTint = Renderer.Tint;
+
 			if ( FadeIn )
-				Renderer.Tint = Renderer.Tint.WithAlpha( 0 );
+				Renderer.Tint = Renderer.Tint.WithAlpha( 0 ); // If we fade in, set alpha to 0
+		}
 	}
 
 	protected override void OnUpdate()
 	{
 		base.OnUpdate();
 
-		if ( HurtAnimation )
+		if ( Renderer != null )
 		{
-			var extraScale = 0.1f;
-			var animationTime = MathX.Remap( LastHurt, 0f, HurtAnimationDuration, 0f, 1f );
-			var sinScale = (float)Math.Sin( animationTime * Math.PI );
-			Transform.Scale = _oldScale * (1f + sinScale * extraScale);
+			if ( IsHurtAnimating )
+				HurtFX();
+
+			if ( IsFadingIn )
+				FadeFX();
 		}
 
 		if ( Renderer is SkinnedModelRenderer renderer )
@@ -78,23 +88,11 @@ public class UnitInfo : Component
 			if ( currentHealth != 0 )
 				renderer.Set( HealthAmountAnimation, MathX.Lerp( currentHealth, relativeHealth, Time.Delta * 10f ) ); // Lerp size based on health instead of instantly setting it.
 		}
-
-		if ( Renderer != null )
-		{
-			if ( FadeIn )
-				if ( Renderer.Tint.a < 1f )
-					Renderer.Tint = Renderer.Tint.WithAlpha( MathX.Lerp( Renderer.Tint.a, 1f, Time.Delta * 2f ) ); // Fade in when spawned
-		}
 	}
 
-	private Vector3 _oldScale = Vector3.One;
-	private float _currentScale = 1f;
 	public void Damage( float amount )
 	{
 		Health = Math.Max( Health - amount, 0 );
-
-		if ( ScaleByHealth )
-			Transform.Scale = MaxScale * MathX.Remap( Health, 0f, MaxHealth, MinScale, 1f );
 
 		HurtFX();
 
@@ -122,24 +120,14 @@ public class UnitInfo : Component
 		GameObject.Destroy();
 	}
 
-	private async void HurtFX()
+	private void HurtFX()
 	{
-		_oldScale = HurtAnimation ? _oldScale : Transform.Scale;
+		Renderer.Tint = Color.Lerp( OriginalTint, HurtColor, HurtAnimation.Evaluate( LastHurt ) );
+		Transform.Scale = MaxScale * MathX.Lerp( 1f, HurtScale, HurtAnimation.Evaluate( LastHurt ) );
+	}
 
-		Color oldColor = Color.White;
-
-		if ( Renderer != null )
-		{
-			oldColor = HurtAnimation ? oldColor : Renderer.Tint;
-			Renderer.Tint = Color.Red;
-		}
-
-		await GameTask.DelayRealtimeSeconds( HurtAnimationDuration );
-
-		if ( Renderer != null )
-			Renderer.Tint = oldColor;
-
-		if ( GameObject != null )
-			Transform.Scale = _oldScale;
+	private void FadeFX()
+	{
+		Renderer.Tint = Renderer.Tint.WithAlpha( SinceSpawned / _fadeAnimation ); // Fade in when spawned
 	}
 }
