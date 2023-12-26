@@ -98,7 +98,7 @@ public class UnitInfo : Component
 
 		if ( Renderer is SkinnedModelRenderer renderer )
 		{
-			var relativeDamage = MathX.Remap( amount, 0f, MaxHealth, 0f, 100f );
+			var relativeDamage = MathX.Remap( amount, 0f, MaxHealth, 0f, 100f ) * 3f;
 			renderer.Set( DamageAmountAnimation, relativeDamage );
 			renderer.Set( HitAnimation, true );
 		}
