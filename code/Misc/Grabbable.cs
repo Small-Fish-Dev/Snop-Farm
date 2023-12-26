@@ -7,6 +7,7 @@ public class Grabbable : Component
 
 	public SnotPlayer Grabber { get; set; }
 	public ModelRenderer Renderer { get; set; }
+	public Collider Collider { get; set; }
 	public bool Grabbed => Grabber != null;
 
 	protected override void OnStart()
@@ -14,6 +15,7 @@ public class Grabbable : Component
 		base.OnStart();
 
 		Renderer = GameObject.Components.Get<ModelRenderer>();
+		Collider = GameObject.Components.Get<Collider>();
 		Tags.Add( "Grab" );
 	}
 
@@ -33,11 +35,13 @@ public class Grabbable : Component
 	{
 		if ( Grabber == null )
 		{
-			Log.Info( "I'VE BEEN GRABBED!" );
 			Grabber = grabber;
 
 			if ( Renderer != null )
 				Renderer.Tint = Renderer.Tint.WithAlpha( 0.5f );
+
+			if ( Collider != null )
+				Collider.Enabled = false;
 
 			return true;
 		}
@@ -54,6 +58,9 @@ public class Grabbable : Component
 
 			if ( Renderer != null )
 				Renderer.Tint = Renderer.Tint.WithAlpha( 1f );
+
+			if ( Collider != null )
+				Collider.Enabled = true;
 
 			return true;
 		}

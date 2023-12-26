@@ -44,18 +44,22 @@ public class SnotPlayer : Component
 	public TimeSince LastPunch { get; set; } = 0f;
 	public TimeSince LastGrab { get; set; } = 0f;
 
-	protected override void OnFixedUpdate()
+	protected override void OnUpdate() // This stuff could be in OnFixedUpdate but Input.Pressed doesn't work (Issue #4318)
 	{
 		if ( Controller == null ) return;
 		//if ( Animator == null ) return;
 
 		//Animator.WithVelocity( Controller.Velocity );
 
-		if ( Input.Down( "Punch" ) )
-			if ( LastPunch >= PunchCooldown )
-				Punch();
+		if ( Input.Pressed( "Punch" ) )
+		{
+			if ( Grabbed != null )
+				if ( LastPunch >= PunchCooldown )
+					Punch();
+		}
 
-		if ( Input.Down( "Grab" ) )
+		if ( Input.Pressed( "Grab" ) )
+		{
 			if ( LastGrab >= GrabCooldown )
 			{
 				if ( Grabbed != null )
@@ -63,10 +67,18 @@ public class SnotPlayer : Component
 				else
 					Grab();
 			}
+		}
 
-		if ( LastPunch >= PunchCooldown * 4f )
-			if ( CitizenAnimation != null )
-				CitizenAnimation.HoldType = CitizenAnimationHelper.HoldTypes.None;
+		if ( CitizenAnimation != null )
+		{
+			if ( Grabbed != null )
+				CitizenAnimation.HoldType = CitizenAnimationHelper.HoldTypes.HoldItem;
+			else
+			{
+				if ( LastPunch >= PunchCooldown * 4f )
+					CitizenAnimation.HoldType = CitizenAnimationHelper.HoldTypes.None;
+			}
+		}
 
 		// Update minimap.
 		var minimap = Minimap.Instance;
@@ -120,35 +132,15 @@ public class SnotPlayer : Component
 		if ( grabTrace.Hit )
 			if ( grabTrace.GameObject.Components.TryGet<Grabbable>( out Grabbable grab ) )
 				if ( grab.OnGrab( this ) )
-				{
 					Grabbed = grab;
-					Log.Info( "GRABBED!" );
-				}
-
-		if ( CitizenAnimation != null )
-		{
-			CitizenAnimation.HoldType = CitizenAnimationHelper.HoldTypes.Punch;
-			CitizenAnimation.Target.Set( "b_attack", true );
-		}
 
 		LastGrab = 0;
-
-		//Log.Info( punchTrace.GameObject.GetAllObjects( true ).FirstOrDefault().Name );
 	}
 
 	public void Release()
 	{
 		if ( Grabbed.OnRelease() )
-		{
 			Grabbed = null;
-			Log.Info( "GRABBED!" );
-		}
-
-		if ( CitizenAnimation != null )
-		{
-			CitizenAnimation.HoldType = CitizenAnimationHelper.HoldTypes.Punch;
-			CitizenAnimation.Target.Set( "b_attack", true );
-		}
 
 		LastGrab = 0;
 	}
