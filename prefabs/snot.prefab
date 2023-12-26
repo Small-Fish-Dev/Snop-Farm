@@ -2,7 +2,7 @@
   "RootObject": {
     "Id": "84f3e366-0e94-403f-a6f8-67043abb04bf",
     "Name": "snot",
-    "Scale": "2,2,2",
+    "Scale": "1.3,1.3,1.5",
     "Enabled": true,
     "Components": [
       {
@@ -11,51 +11,53 @@
         "BodyGroups": 18446744073709551615,
         "BoneMergeTarget": null,
         "CreateBoneObjects": false,
-        "MaterialGroup": null,
+        "MaterialGroup": "Snot",
         "MaterialOverride": null,
-        "Model": "models/enemies/gooman/gooman.vmdl",
+        "Model": "models/snot/snot.vmdl",
         "RenderType": "On",
         "Tint": "1,1,1,1"
       },
       {
-        "__type": "SphereCollider",
-        "__enabled": true,
-        "Center": "0,0,0",
-        "IsTrigger": false,
-        "Radius": 25,
-        "Static": true,
-        "Surface": null
-      },
-      {
         "__type": "UnitInfo",
         "__enabled": true,
+        "DamageAmountAnimation": "damage",
+        "DeadAnimation": "dead",
         "EnemyUnitTypes": [
           "Player",
           "Turret",
           "NPC"
         ],
+        "FadeIn": true,
         "Health": 5,
-        "HurtAnimationVariable": "hit",
+        "HealthAmountAnimation": "health",
+        "HitAnimation": "hit",
         "MinScale": 0.2,
         "Renderer": "84f3e366-0e94-403f-a6f8-67043abb04bf",
-        "ScaleByHealth": true,
+        "ScaleByHealth": false,
         "UnitType": "Slime"
       },
       {
         "__type": "MultiplyPrefab",
         "__enabled": true,
-        "MaxDistance": 90,
+        "MaxDistance": 120,
         "MaxTimeBetweenAttempts": 8,
-        "MinDistance": 60,
+        "MinDistance": 80,
         "MinTimeBetweenAttempts": 4,
         "PrefabToSpawn": "prefabs/snot.prefab"
+      },
+      {
+        "__type": "BoxCollider",
+        "__enabled": true,
+        "Center": "0,0,25",
+        "IsTrigger": false,
+        "Scale": "50,50,50",
+        "Static": false,
+        "Surface": null
       }
     ]
   },
   "ShowInMenu": false,
   "MenuPath": null,
   "MenuIcon": null,
-  "__references": [
-    "apetavern.gooman"
-  ]
+  "__references": []
 }

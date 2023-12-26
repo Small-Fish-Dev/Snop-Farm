@@ -4,20 +4,33 @@ public class UnitInfo : Component
 	public float Health { get; set; } = 10f;
 
 	[Property]
+	public UnitType UnitType { get; set; } = UnitType.None;
+
+	[Property]
 	public bool ScaleByHealth { get; set; } = false;
 
 	[Range( 0f, 1f, 0.1f )]
+	[ShowIf( "ScaleByHealth", true )]
 	[Property]
 	public float MinScale { get; set; } = 0.2f;
 
 	[Property]
-	public UnitType UnitType { get; set; } = UnitType.None;
+	public bool FadeIn { get; set; } = false;
 
 	[Property]
 	public ModelRenderer Renderer { get; set; }
 
 	[Property]
-	public string HurtAnimationVariable { get; set; } = "hit";
+	public string HitAnimation { get; set; } = "hit";
+
+	[Property]
+	public string DamageAmountAnimation { get; set; } = "damage";
+
+	[Property]
+	public string DeadAnimation { get; set; } = "dead";
+
+	[Property]
+	public string HealthAmountAnimation { get; set; } = "health";
 
 	[Property]
 	public List<UnitType> EnemyUnitTypes { get; set; }
@@ -39,6 +52,10 @@ public class UnitInfo : Component
 
 		MaxHealth = Health;
 		MaxScale = Transform.Scale;
+
+		if ( Renderer != null )
+			if ( FadeIn )
+				Renderer.Tint = Renderer.Tint.WithAlpha( 0 );
 	}
 
 	protected override void OnUpdate()
@@ -51,6 +68,22 @@ public class UnitInfo : Component
 			var animationTime = MathX.Remap( LastHurt, 0f, HurtAnimationDuration, 0f, 1f );
 			var sinScale = (float)Math.Sin( animationTime * Math.PI );
 			Transform.Scale = _oldScale * (1f + sinScale * extraScale);
+		}
+
+		if ( Renderer is SkinnedModelRenderer renderer )
+		{
+			var relativeHealth = MathX.Remap( Health, 0f, MaxHealth, 10f, 100f );
+			var currentHealth = renderer.GetFloat( HealthAmountAnimation );
+
+			if ( currentHealth != 0 )
+				renderer.Set( HealthAmountAnimation, MathX.Lerp( currentHealth, relativeHealth, Time.Delta * 10f ) ); // Lerp size based on health instead of instantly setting it.
+		}
+
+		if ( Renderer != null )
+		{
+			if ( FadeIn )
+				if ( Renderer.Tint.a < 1f )
+					Renderer.Tint = Renderer.Tint.WithAlpha( MathX.Lerp( Renderer.Tint.a, 1f, Time.Delta * 2f ) ); // Fade in when spawned
 		}
 	}
 
@@ -66,7 +99,11 @@ public class UnitInfo : Component
 		HurtFX();
 
 		if ( Renderer is SkinnedModelRenderer renderer )
-			renderer.Set( HurtAnimationVariable, true );
+		{
+			var relativeDamage = MathX.Remap( amount, 0f, MaxHealth, 0f, 100f );
+			renderer.Set( DamageAmountAnimation, relativeDamage );
+			renderer.Set( HitAnimation, true );
+		}
 
 		if ( Health <= 0 )
 			Kill();
@@ -75,8 +112,13 @@ public class UnitInfo : Component
 		LastHurt = 0f;
 	}
 
-	public virtual void Kill()
+	public virtual async void Kill()
 	{
+		if ( Renderer is SkinnedModelRenderer renderer )
+			renderer.Set( DeadAnimation, true );
+
+		await GameTask.DelayRealtimeSeconds( 0.5f );
+
 		GameObject.Destroy();
 	}
 
