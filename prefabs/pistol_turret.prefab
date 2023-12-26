@@ -17,14 +17,22 @@
       {
         "__type": "UnitInfo",
         "__enabled": true,
+        "DamageAmountAnimation": "damage",
+        "DeadAnimation": "dead",
         "EnemyUnitTypes": [
           "Slime"
         ],
+        "FadeIn": false,
         "Health": 5,
-        "HurtAnimationVariable": "hit",
-        "MinScale": 0.2,
+        "HealthAmountAnimation": "health",
+        "HitAnimation": "hit",
+        "HurtAnimation": {
+          "rangex": "0,0",
+          "rangey": "0,0"
+        },
+        "HurtColor": "1,0,0,1",
+        "HurtScale": 1.5,
         "Renderer": "dc9ba25f-af5f-4138-9475-f80a4080da06",
-        "ScaleByHealth": false,
         "UnitType": "Turret"
       },
       {
@@ -48,6 +56,11 @@
         "MuzzleFX": "particles/muzzle_flash.vpcf",
         "RotatingSpeed": 60,
         "UnitInfo": "dc9ba25f-af5f-4138-9475-f80a4080da06"
+      },
+      {
+        "__type": "Grabbable",
+        "__enabled": true,
+        "Throwable": false
       }
     ]
   },
