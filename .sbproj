@@ -82,7 +82,7 @@
           "GroupName": "Actions"
         },
         {
-          "Name": "attack2",
+          "Name": "Grab",
           "KeyboardCode": "mouse2",
           "GamepadCode": "LeftTrigger",
           "GroupName": "Actions"

@@ -90,28 +90,12 @@
       "__Prefab": "prefabs/snot.prefab"
     },
     {
-      "Id": "f9770680-d340-4aca-a618-56883c355c41",
-      "Name": "snot (3)",
-      "Position": "-38.80573,-111.24,-0.0002642657",
-      "Scale": "1.3,1.3,1.5",
-      "Enabled": true,
-      "__Prefab": "prefabs/snot.prefab"
-    },
-    {
       "Id": "88b99650-fef8-4434-87ce-5aca456f37e3",
       "Name": "snot (2)",
       "Position": "98.92493,-1161.686,-0.0001540027",
       "Scale": "1.3,1.3,1.5",
       "Enabled": true,
       "__Prefab": "prefabs/snot.prefab"
-    },
-    {
-      "Id": "de65705d-fe43-41c1-8da8-c2af44ae3fad",
-      "Name": "super_snot",
-      "Position": "164.0411,73.34798,-0.000005855511",
-      "Scale": "1.3,1.3,1.5",
-      "Enabled": true,
-      "__Prefab": "prefabs/super_snot.prefab"
     }
   ],
   "SceneProperties": {

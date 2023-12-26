@@ -22,13 +22,26 @@ public class SnotPlayer : Component
 
 	[Range( 1f, 100f, 1f, true, true )]
 	[Property]
-	public float PunchWidth { get; set; } = 20f;
+	public float PunchWidth { get; set; } = 6f;
 
 	[Range( 0f, 2f, 0.1f, true, true )]
 	[Property]
 	public float PunchCooldown { get; set; } = 0.5f;
 
+	[Range( 10f, 500f, 1f, true, true )]
+	[Property]
+	public float GrabRange { get; set; } = 120f;
+
+	[Range( 1f, 100f, 1f, true, true )]
+	[Property]
+	public float GrabWidth { get; set; } = 6f;
+
+	[Range( 0f, 2f, 0.1f, true, true )]
+	[Property]
+	public float GrabCooldown { get; set; } = 0.5f;
+
 	public TimeSince LastPunch { get; set; } = 0f;
+	public TimeSince LastGrab { get; set; } = 0f;
 
 	protected override void OnFixedUpdate()
 	{
@@ -40,6 +53,10 @@ public class SnotPlayer : Component
 		if ( Input.Down( "Punch" ) )
 			if ( LastPunch >= PunchCooldown )
 				Punch();
+
+		if ( Input.Down( "Grab" ) )
+			if ( LastGrab >= GrabCooldown )
+				Grab();
 
 		if ( LastPunch >= PunchCooldown * 4f )
 			if ( CitizenAnimation != null )
@@ -82,6 +99,32 @@ public class SnotPlayer : Component
 		}
 
 		LastPunch = 0;
+
+		//Log.Info( punchTrace.GameObject.GetAllObjects( true ).FirstOrDefault().Name );
+	}
+
+	public void Grab()
+	{
+		if ( Controller == null ) return;
+
+		var grabTrace = Scene.Trace
+			.FromTo( Transform.Position + Controller.EyePosition, Transform.Position + Controller.EyePosition + Controller.EyeRotation.Forward * PunchRange )
+			.Size( PunchWidth )
+			.WithTag( "Grab" )
+			.Run();
+
+		if ( grabTrace.Hit )
+			if ( grabTrace.GameObject.Components.TryGet<Grabbable>( out Grabbable grab ) )
+				if ( grab.OnGrab( this ) )
+					Log.Info( "GRABBED!" );
+
+		if ( CitizenAnimation != null )
+		{
+			CitizenAnimation.HoldType = CitizenAnimationHelper.HoldTypes.Punch;
+			CitizenAnimation.Target.Set( "b_attack", true );
+		}
+
+		LastGrab = 0;
 
 		//Log.Info( punchTrace.GameObject.GetAllObjects( true ).FirstOrDefault().Name );
 	}

@@ -11,7 +11,7 @@
         "BodyGroups": 18446744073709551615,
         "BoneMergeTarget": null,
         "CreateBoneObjects": false,
-        "MaterialGroup": "default",
+        "MaterialGroup": "Snot",
         "MaterialOverride": null,
         "Model": "models/snot/snot.vmdl",
         "RenderType": "On",
