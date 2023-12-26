@@ -7,6 +7,7 @@ public class Grabbable : Component
 
 	public SnotPlayer Grabber { get; set; }
 	public ModelRenderer Renderer { get; set; }
+	public bool Grabbed => Grabber != null;
 
 	protected override void OnStart()
 	{
@@ -19,6 +20,12 @@ public class Grabbable : Component
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
+
+		if ( Grabbed )
+		{
+			Transform.Position = Grabber.Transform.Position + Grabber.Transform.Rotation.Forward * 45f;
+			Transform.Rotation = Grabber.Transform.Rotation;
+		}
 	}
 
 	// true = has been grabbed
@@ -28,6 +35,10 @@ public class Grabbable : Component
 		{
 			Log.Info( "I'VE BEEN GRABBED!" );
 			Grabber = grabber;
+
+			if ( Renderer != null )
+				Renderer.Tint = Renderer.Tint.WithAlpha( 0.5f );
+
 			return true;
 		}
 
@@ -38,9 +49,15 @@ public class Grabbable : Component
 	public virtual bool OnRelease()
 	{
 		if ( Grabber != null )
-			return true;
+		{
+			Grabber = null;
 
-		Log.Info( "No grabsie" );
+			if ( Renderer != null )
+				Renderer.Tint = Renderer.Tint.WithAlpha( 1f );
+
+			return true;
+		}
+
 		return false;
 	}
 }

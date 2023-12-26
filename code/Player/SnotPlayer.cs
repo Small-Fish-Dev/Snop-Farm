@@ -30,16 +30,17 @@ public class SnotPlayer : Component
 
 	[Range( 10f, 500f, 1f, true, true )]
 	[Property]
-	public float GrabRange { get; set; } = 120f;
+	public float GrabRange { get; set; } = 140f;
 
 	[Range( 1f, 100f, 1f, true, true )]
 	[Property]
-	public float GrabWidth { get; set; } = 6f;
+	public float GrabWidth { get; set; } = 16f;
 
 	[Range( 0f, 2f, 0.1f, true, true )]
 	[Property]
-	public float GrabCooldown { get; set; } = 0.5f;
+	public float GrabCooldown { get; set; } = 0.1f;
 
+	public Grabbable Grabbed { get; set; }
 	public TimeSince LastPunch { get; set; } = 0f;
 	public TimeSince LastGrab { get; set; } = 0f;
 
@@ -56,7 +57,12 @@ public class SnotPlayer : Component
 
 		if ( Input.Down( "Grab" ) )
 			if ( LastGrab >= GrabCooldown )
-				Grab();
+			{
+				if ( Grabbed != null )
+					Release();
+				else
+					Grab();
+			}
 
 		if ( LastPunch >= PunchCooldown * 4f )
 			if ( CitizenAnimation != null )
@@ -105,8 +111,6 @@ public class SnotPlayer : Component
 
 	public void Grab()
 	{
-		if ( Controller == null ) return;
-
 		var grabTrace = Scene.Trace
 			.FromTo( Transform.Position + Controller.EyePosition, Transform.Position + Controller.EyePosition + Controller.EyeRotation.Forward * PunchRange )
 			.Size( PunchWidth )
@@ -116,7 +120,10 @@ public class SnotPlayer : Component
 		if ( grabTrace.Hit )
 			if ( grabTrace.GameObject.Components.TryGet<Grabbable>( out Grabbable grab ) )
 				if ( grab.OnGrab( this ) )
+				{
+					Grabbed = grab;
 					Log.Info( "GRABBED!" );
+				}
 
 		if ( CitizenAnimation != null )
 		{
@@ -127,5 +134,22 @@ public class SnotPlayer : Component
 		LastGrab = 0;
 
 		//Log.Info( punchTrace.GameObject.GetAllObjects( true ).FirstOrDefault().Name );
+	}
+
+	public void Release()
+	{
+		if ( Grabbed.OnRelease() )
+		{
+			Grabbed = null;
+			Log.Info( "GRABBED!" );
+		}
+
+		if ( CitizenAnimation != null )
+		{
+			CitizenAnimation.HoldType = CitizenAnimationHelper.HoldTypes.Punch;
+			CitizenAnimation.Target.Set( "b_attack", true );
+		}
+
+		LastGrab = 0;
 	}
 }
