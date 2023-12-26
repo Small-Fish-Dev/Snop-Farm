@@ -21,17 +21,20 @@
           "Slime"
         ],
         "Health": 5,
-        "Renderer": null,
+        "HurtAnimationVariable": "hit",
+        "MinScale": 0.2,
+        "Renderer": "dc9ba25f-af5f-4138-9475-f80a4080da06",
+        "ScaleByHealth": false,
         "UnitType": "Turret"
       },
       {
         "__type": "BoxCollider",
         "__enabled": true,
-        "Center": "0,0,0",
+        "Center": "0,0,22.5",
         "IsTrigger": false,
         "Scale": "50,50,50",
         "Static": false,
-        "Surface": null
+        "Surface": "surfaces/metal.surface"
       },
       {
         "__type": "PointAndShoot",
@@ -42,8 +45,8 @@
         "FiringRate": 0.5,
         "MaxRange": 250,
         "Muzzle": "0,-14.2,22.19999",
-        "MuzzleFX": null,
-        "RotatingSpeed": 40,
+        "MuzzleFX": "particles/muzzle_flash.vpcf",
+        "RotatingSpeed": 60,
         "UnitInfo": "dc9ba25f-af5f-4138-9475-f80a4080da06"
       }
     ]

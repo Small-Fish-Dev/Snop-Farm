@@ -127,7 +127,6 @@ public class PointAndShoot : Component
 		{
 			var muzzleParticle = new SceneParticles( Scene.SceneWorld, MuzzleFX );
 			muzzleParticle.Position = Transform.World.PointToWorld( Muzzle );
-			Log.Info( "Hi" );
 		}
 
 		return closestEnemy;
@@ -148,7 +147,18 @@ public class PointAndShoot : Component
 			var relativeAngle = Transform.Rotation.Forward.WithZ( 0 ).Normal.Angle( direction.Forward.WithZ( 0 ).Normal );
 
 			if ( relativeAngle <= DamageCone / 2 )
+			{
 				closestEnemy.Damage( Damage );
+
+				if ( MuzzleFX != null )
+				{
+					var muzzleParticle = new SceneParticles( Scene.SceneWorld, MuzzleFX );
+					muzzleParticle.Position = Transform.World.PointToWorld( Muzzle );
+
+					Log.Info( Transform.World.PointToWorld( Muzzle ));
+					Log.Info( Transform.Position );
+				}
+			}
 		}
 
 		return closestEnemy;
