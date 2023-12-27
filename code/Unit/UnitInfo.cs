@@ -42,6 +42,7 @@ public class UnitInfo : Component
 	[Property]
 	public List<UnitType> EnemyUnitTypes { get; set; }
 
+	public bool Disabled { get; set; } = false;
 	public Color OriginalTint;
 	public float MaxHealth;
 	public Vector3 MaxScale;
@@ -71,6 +72,8 @@ public class UnitInfo : Component
 	{
 		base.OnUpdate();
 
+		if ( Disabled ) return;
+
 		if ( Renderer != null )
 		{
 			if ( IsHurtAnimating )
@@ -92,6 +95,8 @@ public class UnitInfo : Component
 
 	public void Damage( float amount )
 	{
+		if ( Disabled ) return;
+
 		Health = Math.Max( Health - amount, 0 );
 
 		HurtFX();

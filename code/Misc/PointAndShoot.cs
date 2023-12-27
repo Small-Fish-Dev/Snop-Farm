@@ -2,8 +2,6 @@ using Sandbox;
 
 public class PointAndShoot : Component
 {
-	[Property]
-	public UnitInfo UnitInfo { get; set; }
 
 	[Range( 10f, 1000f, 1f, true, true )]
 	[Property]
@@ -36,6 +34,7 @@ public class PointAndShoot : Component
 
 	public TimeSince LastShot { get; set; } = 0f;
 	public UnitInfo ClosestEnemy { get; set; }
+	public UnitInfo UnitInfo { get; set; }
 
 	TimeSince _lastFxMuzzle = 0;
 
@@ -73,13 +72,15 @@ public class PointAndShoot : Component
 	protected override void OnStart()
 	{
 		base.OnStart();
+
+		UnitInfo = GameObject.Components.Get<UnitInfo>();
 	}
 
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
 
-		if ( UnitInfo == null ) return;
+		if ( UnitInfo == null || UnitInfo.Disabled ) return;
 
 		// TODO Check every tot seconds or else too laggy
 

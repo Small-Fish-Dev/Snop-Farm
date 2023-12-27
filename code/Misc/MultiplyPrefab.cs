@@ -17,6 +17,7 @@ public class MultiplyPrefab : Component
 	[Property]
 	public float MaxTimeBetweenAttempts { get; set; } = 8f;
 
+	public UnitInfo UnitInfo { get; set; }
 	public TimeSince LastSpawnAttempt { get; set; } = 0f;
 	private float _nextAttempt;
 
@@ -39,12 +40,15 @@ public class MultiplyPrefab : Component
 		base.OnStart();
 
 		_nextAttempt = Game.Random.Float( MinTimeBetweenAttempts, MaxTimeBetweenAttempts );
+
+		UnitInfo = GameObject.Components.Get<UnitInfo>();
 	}
 
 	protected override void OnFixedUpdate()
 	{
 		base.OnFixedUpdate();
 
+		if ( UnitInfo == null || UnitInfo.Disabled ) return;
 		if ( PrefabToSpawn == null ) return;
 
 		if ( LastSpawnAttempt >= _nextAttempt )
