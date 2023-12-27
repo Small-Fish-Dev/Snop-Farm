@@ -44,7 +44,7 @@ public class SnotPlayer : Component
 	public TimeSince LastPunch { get; set; } = 0f;
 	public TimeSince LastGrab { get; set; } = 0f;
 
-	protected override void OnUpdate() // This stuff could be in OnFixedUpdate but Input.Pressed doesn't work (Issue #4318)
+	protected override void OnFixedUpdate()
 	{
 		if ( Controller == null ) return;
 		//if ( Animator == null ) return;
@@ -53,7 +53,7 @@ public class SnotPlayer : Component
 
 		if ( Input.Pressed( "Punch" ) )
 		{
-			if ( Grabbed != null )
+			if ( Grabbed == null )
 				if ( LastPunch >= PunchCooldown )
 					Punch();
 		}

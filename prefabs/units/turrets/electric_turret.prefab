@@ -17,11 +17,22 @@
       {
         "__type": "UnitInfo",
         "__enabled": true,
+        "DamageAmountAnimation": "damage",
+        "DeadAnimation": "dead",
         "EnemyUnitTypes": [
           "Slime"
         ],
+        "FadeIn": false,
         "Health": 5,
-        "Renderer": null,
+        "HealthAmountAnimation": "health",
+        "HitAnimation": "hit",
+        "HurtAnimation": {
+          "rangex": "0,0",
+          "rangey": "0,0"
+        },
+        "HurtColor": "1,0,0,1",
+        "HurtScale": 1.5,
+        "Renderer": "e76ee5af-e49c-4317-8244-7e0a7efab619",
         "UnitType": "Turret"
       },
       {
@@ -41,7 +52,8 @@
         "DamageCone": 360,
         "FiringRate": 0.1,
         "MaxRange": 200,
-        "Nuzzle": "25.6,0,37.69999",
+        "Muzzle": "0,0,0",
+        "MuzzleFX": null,
         "RotatingSpeed": 0,
         "UnitInfo": "e76ee5af-e49c-4317-8244-7e0a7efab619"
       }

@@ -1,6 +1,6 @@
 {
   "RootObject": {
-    "Id": "3b8ba041-1ee8-48ca-bfad-7cbf19089783",
+    "Id": "5727e288-7d51-4de4-af63-f367cd06d1d9",
     "Name": "smg_turret",
     "Enabled": true,
     "Components": [
@@ -26,13 +26,15 @@
         "Health": 5,
         "HealthAmountAnimation": "health",
         "HitAnimation": "hit",
-        "HurtAnimation": {
-          "rangex": "0,0",
-          "rangey": "0,0"
-        },
+        "HurtAnimation": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
         "HurtColor": "1,0,0,1",
         "HurtScale": 1.5,
-        "Renderer": null,
+        "Renderer": "5727e288-7d51-4de4-af63-f367cd06d1d9",
         "UnitType": "Turret"
       },
       {
@@ -55,7 +57,7 @@
         "Muzzle": "0,0,0",
         "MuzzleFX": null,
         "RotatingSpeed": 120,
-        "UnitInfo": "3b8ba041-1ee8-48ca-bfad-7cbf19089783"
+        "UnitInfo": "5727e288-7d51-4de4-af63-f367cd06d1d9"
       },
       {
         "__type": "Grabbable",
