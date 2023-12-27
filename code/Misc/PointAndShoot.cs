@@ -46,13 +46,15 @@ public class PointAndShoot : Component
 
 			using ( Gizmo.Scope( "donut", 0, Rotation.FromPitch( 90f ) ) )
 			{
+				draw.Color = Color.Red;
 				draw.SolidCircle( 0f, MaxRange, -DamageCone / 2f, DamageCone, (int)(DamageCone) ); // Display range and damage cone
-
-				draw.SolidRing( Vector3.Backward * Muzzle.z, Muzzle.x - 1f, Muzzle.x + 1f, sections: 24 ); // Outer rotation ring
+				draw.Color = Color.White;
+				draw.SolidRing( Vector3.Backward, MaxRange, MaxRange + 5f, sections: 360 ); // Outer rotation ring
 			}
 			var rotationSpeed = Rotation.FromYaw( RealTime.Now * RotatingSpeed );
 			draw.LineThickness = 10f;
-			draw.Line( Vector3.Up * Muzzle.z - rotationSpeed.Forward * Muzzle.x, Vector3.Up * Muzzle.z + rotationSpeed.Forward * Muzzle.x ); // Display rotation speed
+			draw.Line( Vector3.Up - rotationSpeed.Forward * MaxRange, Vector3.Up + rotationSpeed.Forward * MaxRange ); // Display rotation speed
+			draw.SolidCone( Muzzle + Vector3.Forward * 15f, Vector3.Backward * 15f, 2f );
 
 			if ( _lastFxMuzzle >= FiringRate )
 			{

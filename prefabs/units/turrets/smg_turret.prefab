@@ -54,10 +54,9 @@
         "DamageCone": 30,
         "FiringRate": 0.1,
         "MaxRange": 350,
-        "Muzzle": "0,0,0",
+        "Muzzle": "18.19998,0,39",
         "MuzzleFX": null,
-        "RotatingSpeed": 120,
-        "UnitInfo": "5727e288-7d51-4de4-af63-f367cd06d1d9"
+        "RotatingSpeed": 120
       },
       {
         "__type": "Grabbable",

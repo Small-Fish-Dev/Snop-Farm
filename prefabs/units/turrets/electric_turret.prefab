@@ -26,10 +26,12 @@
         "Health": 5,
         "HealthAmountAnimation": "health",
         "HitAnimation": "hit",
-        "HurtAnimation": {
-          "rangex": "0,0",
-          "rangey": "0,0"
-        },
+        "HurtAnimation": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
         "HurtColor": "1,0,0,1",
         "HurtScale": 1.5,
         "Renderer": "e76ee5af-e49c-4317-8244-7e0a7efab619",
@@ -52,10 +54,9 @@
         "DamageCone": 360,
         "FiringRate": 0.1,
         "MaxRange": 200,
-        "Muzzle": "0,0,0",
+        "Muzzle": "0,0,38.2",
         "MuzzleFX": null,
-        "RotatingSpeed": 0,
-        "UnitInfo": "e76ee5af-e49c-4317-8244-7e0a7efab619"
+        "RotatingSpeed": 91
       }
     ],
     "Children": [

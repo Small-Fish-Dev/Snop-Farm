@@ -26,10 +26,12 @@
         "Health": 5,
         "HealthAmountAnimation": "health",
         "HitAnimation": "hit",
-        "HurtAnimation": {
-          "rangex": "0,0",
-          "rangey": "0,0"
-        },
+        "HurtAnimation": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
         "HurtColor": "1,0,0,1",
         "HurtScale": 1.5,
         "Renderer": "dc9ba25f-af5f-4138-9475-f80a4080da06",
@@ -52,10 +54,9 @@
         "DamageCone": 15,
         "FiringRate": 0.5,
         "MaxRange": 250,
-        "Muzzle": "0,-14.2,22.19999",
+        "Muzzle": "26,0,37.5",
         "MuzzleFX": "particles/muzzle_flash.vpcf",
-        "RotatingSpeed": 60,
-        "UnitInfo": "dc9ba25f-af5f-4138-9475-f80a4080da06"
+        "RotatingSpeed": 60
       },
       {
         "__type": "Grabbable",
