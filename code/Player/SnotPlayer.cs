@@ -51,7 +51,7 @@ public class SnotPlayer : Component
 
 		//Animator.WithVelocity( Controller.Velocity );
 
-		if ( Input.Pressed( "Punch" ) )
+		if ( Input.Down( "Punch" ) ) // I wanna hold to punch
 		{
 			if ( Grabbed == null )
 				if ( LastPunch >= PunchCooldown )
