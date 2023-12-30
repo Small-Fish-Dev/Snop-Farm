@@ -129,6 +129,13 @@
       "Position": "-40.894,79.72769,0",
       "Enabled": true,
       "__Prefab": "prefabs/shops/pistol_turret_shop.prefab"
+    },
+    {
+      "Id": "1f41a3da-821b-46eb-b03a-3d2da6714795",
+      "Name": "dynamite",
+      "Position": "307.7717,-146.6613,92.79842",
+      "Enabled": true,
+      "__Prefab": "prefabs/throwables/dynamite.prefab"
     }
   ],
   "SceneProperties": {
