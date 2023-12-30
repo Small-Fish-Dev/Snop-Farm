@@ -8,6 +8,7 @@ public class Grabbable : Component
 	public SnotPlayer Grabber { get; set; }
 	public ModelRenderer Renderer { get; set; }
 	public Collider Collider { get; set; }
+	public Rigidbody Rigidbody { get; set; }
 	public UnitInfo UnitInfo { get; set; }
 	public bool Grabbed => Grabber != null;
 
@@ -17,6 +18,7 @@ public class Grabbable : Component
 
 		Renderer = GameObject.Components.Get<ModelRenderer>();
 		Collider = GameObject.Components.Get<Collider>();
+		Rigidbody = GameObject.Components.Get<Rigidbody>();
 		UnitInfo = GameObject.Components.Get<UnitInfo>();
 		Tags.Add( "Grab" );
 	}
@@ -45,6 +47,9 @@ public class Grabbable : Component
 			if ( Collider != null )
 				Collider.Enabled = false;
 
+			if ( Rigidbody != null )
+				Rigidbody.Enabled = false;
+
 			if ( UnitInfo != null )
 				UnitInfo.Disabled = true;
 
@@ -68,6 +73,9 @@ public class Grabbable : Component
 
 			if ( Collider != null )
 				Collider.Enabled = true;
+
+			if ( Rigidbody != null )
+				Rigidbody.Enabled = true;
 
 			if ( UnitInfo != null )
 				UnitInfo.Disabled = false;
