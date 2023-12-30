@@ -34,10 +34,16 @@ public class UnitInfo : Component
 	public string DamageAmountAnimation { get; set; } = "damage";
 
 	[Property]
-	public string DeadAnimation { get; set; } = "dead";
+	public string DeathAnimation { get; set; } = "dead";
 
 	[Property]
 	public string HealthAmountAnimation { get; set; } = "health";
+
+	[Property]
+	public SoundEvent HurtSound { get; set; }
+
+	[Property]
+	public SoundEvent DeathSound { get; set; }
 
 	[Property]
 	public List<UnitType> EnemyUnitTypes { get; set; }
@@ -101,6 +107,9 @@ public class UnitInfo : Component
 
 		HurtFX();
 
+		if ( HurtSound != null )
+			Sound.Play( HurtSound, Transform.Position );
+
 		if ( Renderer is SkinnedModelRenderer renderer )
 		{
 			var relativeDamage = MathX.Remap( amount, 0f, MaxHealth, 0f, 100f ) * 3f;
@@ -118,9 +127,14 @@ public class UnitInfo : Component
 	public virtual async void Kill()
 	{
 		if ( Renderer is SkinnedModelRenderer renderer )
-			renderer.Set( DeadAnimation, true );
+			renderer.Set( DeathAnimation, true );
+
+		Disabled = true;
 
 		await GameTask.DelayRealtimeSeconds( 0.5f );
+
+		if ( DeathSound != null )
+			Sound.Play( DeathSound, Transform.Position );
 
 		GameObject.Destroy();
 	}

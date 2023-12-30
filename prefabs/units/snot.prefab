@@ -21,7 +21,8 @@
         "__type": "UnitInfo",
         "__enabled": true,
         "DamageAmountAnimation": "damage",
-        "DeadAnimation": "dead",
+        "DeathAnimation": "dead",
+        "DeathSound": "sounds/splurge.sound",
         "EnemyUnitTypes": [
           "Player",
           "Turret",
@@ -46,6 +47,7 @@
         },
         "HurtColor": "1,0,0,1",
         "HurtScale": 1,
+        "HurtSound": "sounds/snot_hit.sound",
         "Renderer": "5912cfe0-9d1f-4e75-80ef-7d312ad065c9",
         "UnitType": "Slime"
       },
