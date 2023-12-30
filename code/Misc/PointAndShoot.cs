@@ -45,7 +45,7 @@ public class PointAndShoot : Component
 
 			using ( Gizmo.Scope( "donut", 0, Rotation.FromPitch( 90f ) ) )
 			{
-				draw.Color = Color.Red;
+				draw.Color = Color.Red.WithAlpha( 0.4f );
 				draw.SolidCircle( 0f, MaxRange, -DamageCone / 2f, DamageCone, (int)(DamageCone) ); // Display range and damage cone
 				draw.Color = Color.White;
 				draw.SolidRing( Vector3.Backward, MaxRange, MaxRange + 5f, sections: 360 ); // Outer rotation ring

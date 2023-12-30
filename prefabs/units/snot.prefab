@@ -61,11 +61,11 @@
         "PrefabToSpawn": "prefabs/units/snot.prefab"
       },
       {
-        "__type": "BoxCollider",
+        "__type": "SphereCollider",
         "__enabled": true,
-        "Center": "0,0,25",
+        "Center": "0,0,0",
         "IsTrigger": false,
-        "Scale": "80,80,50",
+        "Radius": 50,
         "Static": false,
         "Surface": null
       }

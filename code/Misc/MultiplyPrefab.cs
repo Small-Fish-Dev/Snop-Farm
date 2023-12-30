@@ -76,7 +76,7 @@ public class MultiplyPrefab : Component
 		LastSpawnAttempt = 0f;
 		_nextAttempt = Game.Random.Float( MinTimeBetweenAttempts, MaxTimeBetweenAttempts );
 
-		var anglesToTry = 16;
+		var anglesToTry = 8;
 		var angleSize = 360f / anglesToTry;
 		var randomAngle = Game.Random.Int( anglesToTry ) * angleSize;
 
@@ -96,7 +96,7 @@ public class MultiplyPrefab : Component
 			var verticalTrace = Scene.Trace.FromTo( horizontalTo, verticalTo )
 				.Run();
 
-			if ( !verticalTrace.Hit || verticalTrace.StartedSolid || Vector3.GetAngle( verticalTrace.Normal, Vector3.Up ) > MaxGroundAngle || verticalTrace.GameObject != null && verticalTrace.GameObject.Tags.Has( "Unit" ) ) continue;
+			if ( !verticalTrace.Hit || Vector3.GetAngle( verticalTrace.Normal, Vector3.Up ) > MaxGroundAngle ) continue;
 
 			var boundsTrace = Scene.Trace.Box( BoundsCheck, verticalTo, verticalTo )
 				.WithTag( "Unit" )

@@ -81,6 +81,54 @@
       "Scale": "1.3,1.3,1.3",
       "Enabled": true,
       "__Prefab": "prefabs/units/snot.prefab"
+    },
+    {
+      "Id": "2762a5da-bb1b-4e8c-9095-26869f45068a",
+      "Name": "snot (3)",
+      "Position": "306.0429,-821.8196,0.00004744938",
+      "Scale": "1.3,1.3,1.3",
+      "Enabled": true,
+      "__Prefab": "prefabs/units/snot.prefab"
+    },
+    {
+      "Id": "d64fac4b-779b-4ed3-ad59-69be1466dbe1",
+      "Name": "snot (4)",
+      "Position": "-55.92029,-809.8531,0.00002587469",
+      "Scale": "1.3,1.3,1.3",
+      "Enabled": true,
+      "__Prefab": "prefabs/units/snot.prefab"
+    },
+    {
+      "Id": "aa3c2898-f502-480e-92a4-e1cd986dd87c",
+      "Name": "snot (5)",
+      "Position": "977.7555,-589.5681,0.00008748657",
+      "Scale": "1.3,1.3,1.3",
+      "Enabled": true,
+      "__Prefab": "prefabs/units/snot.prefab"
+    },
+    {
+      "Id": "9983d184-68c3-40c7-a45e-78f61f46738b",
+      "Name": "snot (6)",
+      "Position": "2094.896,-1431.558,0.0001585636",
+      "Scale": "1.3,1.3,1.3",
+      "Enabled": true,
+      "__Prefab": "prefabs/units/snot.prefab"
+    },
+    {
+      "Id": "5edd7d44-1abd-46bb-b649-2a3d5a84f603",
+      "Name": "snot (7)",
+      "Position": "1733.866,-1850.234,-0.00007472326",
+      "Scale": "1.3,1.3,1.3",
+      "Enabled": true,
+      "__Prefab": "prefabs/units/snot.prefab"
+    },
+    {
+      "Id": "3bc8f6f4-efe7-41d9-ac8e-62724c6e1507",
+      "Name": "snot (8)",
+      "Position": "1551.25,-1505.623,-0.0004798643",
+      "Scale": "1.3,1.3,1.3",
+      "Enabled": true,
+      "__Prefab": "prefabs/units/snot.prefab"
     }
   ],
   "SceneProperties": {
