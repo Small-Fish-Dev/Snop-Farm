@@ -23,6 +23,13 @@ public class MultiplyPrefab : Component
 	[Property]
 	public Vector3 BoundsCheck { get; set; }
 
+	[Property]
+	public PrefabFile RarePrefabToSpawn { get; set; }
+
+	[Range( 1f, 100f, 1f )]
+	[Property]
+	public float RareChance { get; set; } = 15f;
+
 	public UnitInfo UnitInfo { get; set; }
 	public TimeSince LastSpawnAttempt { get; set; } = 0f;
 	private float _nextAttempt;
@@ -111,7 +118,8 @@ public class MultiplyPrefab : Component
 
 	public void SpawnPrefab( Vector3 position )
 	{
-		var spawned = SceneUtility.Instantiate( SceneUtility.GetPrefabScene( PrefabToSpawn ) );
+		var isRare = Game.Random.Float( 0f, 100f ) <= RareChance;
+		var spawned = SceneUtility.Instantiate( SceneUtility.GetPrefabScene( isRare ? RarePrefabToSpawn : PrefabToSpawn ) );
 		spawned.Transform.Position = position;
 		spawned.Transform.Rotation = Rotation.FromYaw( Game.Random.Float( 360f ) );
 	}

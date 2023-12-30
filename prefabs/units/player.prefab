@@ -36,14 +36,22 @@
       {
         "__type": "UnitInfo",
         "__enabled": true,
+        "DamageAmountAnimation": "damage",
+        "DeadAnimation": "dead",
         "EnemyUnitTypes": [
           "Slime"
         ],
+        "FadeIn": false,
         "Health": 10,
-        "HurtAnimationVariable": "hit",
-        "MinScale": 0.2,
+        "HealthAmountAnimation": "health",
+        "HitAnimation": "hit",
+        "HurtAnimation": {
+          "rangex": "0,0",
+          "rangey": "0,0"
+        },
+        "HurtColor": "1,0,0,1",
+        "HurtScale": 1.5,
         "Renderer": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
-        "ScaleByHealth": false,
         "UnitType": "Player"
       },
       {
@@ -57,7 +65,7 @@
         "CollisionRadius": 16,
         "EnableUnstuck": true,
         "Gravity": "0,0,850",
-        "GroundAngle": 45,
+        "GroundAngle": 70,
         "GroundFriction": 4,
         "IgnoreLayers": "player",
         "MaxUnstuckTries": 20,
@@ -94,6 +102,9 @@
         "__enabled": true,
         "CitizenAnimation": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
         "Controller": "35c2419c-d094-4be5-b8a4-8b3916c19fdf",
+        "GrabCooldown": 0.1,
+        "GrabRange": 140,
+        "GrabWidth": 16,
         "PunchCooldown": 0.5,
         "PunchDamage": 1,
         "PunchRange": 120,

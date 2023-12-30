@@ -1,7 +1,7 @@
 {
   "RootObject": {
     "Id": "5912cfe0-9d1f-4e75-80ef-7d312ad065c9",
-    "Name": "snot",
+    "Name": "purple_snot",
     "Scale": "1.3,1.3,1.3",
     "Enabled": true,
     "Components": [
@@ -11,11 +11,11 @@
         "BodyGroups": 18446744073709551615,
         "BoneMergeTarget": null,
         "CreateBoneObjects": false,
-        "MaterialGroup": "default",
+        "MaterialGroup": "Snot",
         "MaterialOverride": null,
         "Model": "models/snot/snot.vmdl",
         "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "Tint": "0.20219,0.03308,0.37129,1"
       },
       {
         "__type": "UnitInfo",
@@ -28,7 +28,7 @@
           "NPC"
         ],
         "FadeIn": true,
-        "Health": 5,
+        "Health": 20,
         "HealthAmountAnimation": "health",
         "HitAnimation": "hit",
         "HurtAnimation": {
@@ -55,11 +55,11 @@
         "BoundsCheck": "60,60,50",
         "MaxDistance": 140,
         "MaxGroundAngle": 60,
-        "MaxTimeBetweenAttempts": 10,
+        "MaxTimeBetweenAttempts": 6,
         "MinDistance": 80,
-        "MinTimeBetweenAttempts": 6,
+        "MinTimeBetweenAttempts": 4,
         "PrefabToSpawn": "prefabs/units/snot.prefab",
-        "RareChance": 5,
+        "RareChance": 15,
         "RarePrefabToSpawn": "prefabs/units/purple_snot.prefab"
       },
       {
