@@ -55,7 +55,7 @@
         "FiringRate": 0.5,
         "MaxRange": 250,
         "Muzzle": "26,0,37.5",
-        "MuzzleFX": "particles/muzzle_flash.vpcf",
+        "MuzzleFX": "prefabs/particles/muzzle_flash.prefab",
         "RotatingSpeed": 60
       },
       {

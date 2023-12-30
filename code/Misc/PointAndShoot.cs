@@ -1,4 +1,5 @@
 using Sandbox;
+using System.Diagnostics;
 
 public class PointAndShoot : Component
 {
@@ -30,13 +31,11 @@ public class PointAndShoot : Component
 	public Vector3 Muzzle { get; set; }
 
 	[Property]
-	public ParticleSystem MuzzleFX { get; set; }
+	public PrefabFile MuzzleFX { get; set; }
 
 	public TimeSince LastShot { get; set; } = 0f;
 	public UnitInfo ClosestEnemy { get; set; }
 	public UnitInfo UnitInfo { get; set; }
-
-	TimeSince _lastFxMuzzle = 0;
 
 	protected override void DrawGizmos()
 	{
@@ -54,19 +53,9 @@ public class PointAndShoot : Component
 			var rotationSpeed = Rotation.FromYaw( RealTime.Now * RotatingSpeed );
 			draw.LineThickness = 10f;
 			draw.Line( Vector3.Up - rotationSpeed.Forward * MaxRange, Vector3.Up + rotationSpeed.Forward * MaxRange ); // Display rotation speed
-			draw.SolidCone( Muzzle + Vector3.Forward * 15f, Vector3.Backward * 15f, 2f );
 
-			if ( _lastFxMuzzle >= FiringRate )
-			{
-				if ( MuzzleFX != null )
-				{
-					draw.Particles( MuzzleFX.ResourcePath, Transform.World.WithPosition( Muzzle ) );
-				}
-
-				_lastFxMuzzle = 0;
-			}
-
-
+			if ( Time.Now % FiringRate >= FiringRate / 2f )
+				draw.SolidCone( Muzzle + Vector3.Forward * 15f, Vector3.Backward * 15f, 2f );
 		}
 	}
 
@@ -128,8 +117,8 @@ public class PointAndShoot : Component
 
 		if ( MuzzleFX != null )
 		{
-			var muzzleParticle = new SceneParticles( Scene.SceneWorld, MuzzleFX );
-			muzzleParticle.Position = Transform.World.PointToWorld( Muzzle );
+			//var muzzleParticle = new SceneParticles( Scene.SceneWorld, MuzzleFX );
+			//muzzleParticle.Position = Transform.World.PointToWorld( Muzzle );
 		}
 
 		return closestEnemy;
@@ -155,11 +144,15 @@ public class PointAndShoot : Component
 
 				if ( MuzzleFX != null )
 				{
-					var muzzleParticle = new SceneParticles( Scene.SceneWorld, MuzzleFX );
-					muzzleParticle.Position = Transform.World.PointToWorld( Muzzle );
+					//var spawned = SceneUtility.Instantiate( SceneUtility.GetPrefabScene( MuzzleFX ) );
+					//spawned.Transform.Position = Transform.World.PointToWorld( Muzzle );
+					//spawned.Transform.Rotation = Rotation.FromYaw( Game.Random.Float( 360f ) );
+					//var muzzleParticle = new SceneParticles( Scene.SceneWorld, MuzzleFX );
+					//muzzleParticle.Position = Transform.World.PointToWorld( Muzzle );
 
-					Log.Info( Transform.World.PointToWorld( Muzzle ));
-					Log.Info( Transform.Position );
+					//Log.Info( Transform.World.PointToWorld( Muzzle ));
+					//Log.Info( Transform.Position );
+					//Log.Info( muzzleParticle.Position );
 				}
 			}
 		}
