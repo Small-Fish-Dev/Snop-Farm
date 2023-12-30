@@ -85,6 +85,23 @@
             }
           ]
         }
+      },
+      {
+        "__type": "FadeOut",
+        "__enabled": true,
+        "FadeOutCurve": {
+          "rangex": "0,0.6",
+          "frames": [
+            {
+              "y": 1
+            },
+            {
+              "x": 1,
+              "in": 3.1063833,
+              "out": -3.1063833
+            }
+          ]
+        }
       }
     ]
   },

@@ -61,7 +61,7 @@ public class UnitInfo : Component
 		SinceSpawned = 0;
 
 		if ( Renderer != null )
-			OriginalTint = Renderer.Tint;
+			OriginalTint = Renderer.Tint.WithAlpha( 1f );
 	}
 
 	protected override void OnUpdate()
@@ -118,7 +118,8 @@ public class UnitInfo : Component
 
 		Disabled = true;
 
-		await GameTask.DelayRealtimeSeconds( 0.5f );
+		if ( GameObject.Components.TryGet<FadeOut>( out var fadeOut ) )
+			await fadeOut.StartFadeOut();
 
 		if ( DeathSound != null )
 			Sound.Play( DeathSound, Transform.Position );
