@@ -1,7 +1,11 @@
+using Editor;
 using Sandbox;
 
 public class Shop : Grabbable
 {
+	[HideInEditor]
+	public new bool Throwable { get; set; } = false; // Hide old "Throwable" bool from Grabbable component
+
 	[Property]
 	public PrefabFile PrefabToGrab { get; set; }
 
