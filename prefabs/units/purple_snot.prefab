@@ -28,7 +28,6 @@
           "Turret",
           "NPC"
         ],
-        "FadeIn": true,
         "Health": 20,
         "HealthAmountAnimation": "health",
         "HitAnimation": "hit",
@@ -72,6 +71,20 @@
         "Radius": 50,
         "Static": false,
         "Surface": null
+      },
+      {
+        "__type": "FadeIn",
+        "__enabled": true,
+        "FadeInCurve": {
+          "rangex": "0,0.6",
+          "frames": [
+            {},
+            {
+              "x": 1,
+              "y": 1
+            }
+          ]
+        }
       }
     ]
   },

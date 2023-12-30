@@ -20,11 +20,6 @@ public class UnitInfo : Component
 	public bool IsHurtAnimating => LastHurt != float.MaxValue && LastHurt <= HurtAnimation.TimeRange.y;
 
 	[Property]
-	public bool FadeIn { get; set; } = false;
-	private float _fadeAnimation = 0.3f;
-	public bool IsFadingIn => FadeIn && SinceSpawned <= _fadeAnimation; // Duration of fadein, no reason to make it editable.
-
-	[Property]
 	public ModelRenderer Renderer { get; set; }
 
 	[Property]
@@ -66,12 +61,7 @@ public class UnitInfo : Component
 		SinceSpawned = 0;
 
 		if ( Renderer != null )
-		{
 			OriginalTint = Renderer.Tint;
-
-			if ( FadeIn )
-				Renderer.Tint = Renderer.Tint.WithAlpha( 0 ); // If we fade in, set alpha to 0
-		}
 	}
 
 	protected override void OnUpdate()
@@ -84,9 +74,6 @@ public class UnitInfo : Component
 		{
 			if ( IsHurtAnimating )
 				HurtFX();
-
-			if ( IsFadingIn )
-				FadeFX();
 		}
 
 		if ( Renderer is SkinnedModelRenderer renderer )
@@ -143,10 +130,5 @@ public class UnitInfo : Component
 	{
 		Renderer.Tint = Color.Lerp( OriginalTint, HurtColor, HurtAnimation.Evaluate( LastHurt ) );
 		Transform.Scale = MaxScale * MathX.Lerp( 1f, HurtScale, HurtAnimation.Evaluate( LastHurt ) );
-	}
-
-	private void FadeFX()
-	{
-		Renderer.Tint = Renderer.Tint.WithAlpha( SinceSpawned / _fadeAnimation ); // Fade in when spawned
 	}
 }
