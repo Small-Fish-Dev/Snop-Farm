@@ -131,8 +131,7 @@ public class SnotPlayer : Component
 
 		if ( grabTrace.Hit )
 			if ( grabTrace.GameObject.Components.TryGet<Grabbable>( out Grabbable grab ) )
-				if ( grab.OnGrab( this ) )
-					Grabbed = grab;
+				grab.OnGrab( this );
 
 		LastGrab = 0;
 	}

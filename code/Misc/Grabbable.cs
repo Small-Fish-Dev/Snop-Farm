@@ -48,6 +48,8 @@ public class Grabbable : Component
 			if ( UnitInfo != null )
 				UnitInfo.Disabled = true;
 
+			grabber.Grabbed = this;
+
 			return true;
 		}
 
