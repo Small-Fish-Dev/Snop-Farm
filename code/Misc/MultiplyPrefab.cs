@@ -12,10 +12,16 @@ public class MultiplyPrefab : Component
 	public float MaxDistance { get; set; } = 70f;
 
 	[Property]
+	public float MaxGroundAngle { get; set; } = 60f;
+
+	[Property]
 	public float MinTimeBetweenAttempts { get; set; } = 4f;
 
 	[Property]
 	public float MaxTimeBetweenAttempts { get; set; } = 8f;
+
+	[Property]
+	public Vector3 BoundsCheck { get; set; }
 
 	public UnitInfo UnitInfo { get; set; }
 	public TimeSince LastSpawnAttempt { get; set; } = 0f;
@@ -25,11 +31,21 @@ public class MultiplyPrefab : Component
 	{
 		if ( Gizmo.IsSelected )
 		{
+			Gizmo.GizmoDraw draw = Gizmo.Draw;
+
 			using ( Gizmo.Scope( "donut", 0, Transform.Rotation * Rotation.FromPitch( 90f ) ) )
 			{
-				Gizmo.GizmoDraw draw = Gizmo.Draw;
-
+				draw.Color = Color.White.WithAlpha( 0.2f );
 				draw.SolidRing( 0, MinDistance, MaxDistance, sections: 30 ); // Display spawning distance
+			}
+
+			var animationRotation = Rotation.FromYaw( Time.Now * 50f );
+			var animationSin = MathF.Sin( Time.Now * 5f );
+			var animationDistance = MathX.Remap( animationSin, -1f, 1f, MinDistance, MaxDistance );
+
+			using ( Gizmo.Scope( "rotatearound", animationRotation.Forward * animationDistance + Vector3.Up * BoundsCheck.z / 2f ) )
+			{
+				draw.LineBBox( BBox.FromPositionAndSize( 0, BoundsCheck ) );
 			}
 		}
 	}
@@ -68,18 +84,25 @@ public class MultiplyPrefab : Component
 		{
 			var directionToTry = Rotation.FromYaw( angle + randomAngle);
 			var randomDistance = Game.Random.Float( MinDistance, MaxDistance );
-			var startPos = Transform.Position + Vector3.Up * 32f;
-			var midPos = startPos + directionToTry.Forward * randomDistance;
-			var horizontalTrace = Scene.Trace.FromTo( startPos, midPos )
+
+			var horizontalFrom = Transform.Position + Vector3.Up * BoundsCheck.z;
+			var horizontalTo = horizontalFrom + directionToTry.Forward * randomDistance;
+			var horizontalTrace = Scene.Trace.FromTo( horizontalFrom, horizontalTo )
 				.Run();
 
 			if ( horizontalTrace.Hit ) continue;
 
-			var endPos = midPos + Vector3.Down * 64f;
-			var verticalTrace = Scene.Trace.FromTo( midPos, endPos )
+			var verticalTo = horizontalTo - Vector3.Up * BoundsCheck * 2f;
+			var verticalTrace = Scene.Trace.FromTo( horizontalTo, verticalTo )
 				.Run();
 
-			if ( !verticalTrace.Hit || verticalTrace.GameObject != null && verticalTrace.GameObject.Tags.Has( "Unit" ) ) continue;
+			if ( !verticalTrace.Hit || verticalTrace.StartedSolid || Vector3.GetAngle( verticalTrace.Normal, Vector3.Up ) > MaxGroundAngle || verticalTrace.GameObject != null && verticalTrace.GameObject.Tags.Has( "Unit" ) ) continue;
+
+			var boundsTrace = Scene.Trace.Box( BoundsCheck, verticalTo, verticalTo )
+				.WithTag( "Unit" )
+				.Run();
+
+			if ( boundsTrace.Hit ) continue;
 
 			SpawnPrefab( verticalTrace.HitPosition );
 			return;
