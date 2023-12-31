@@ -33,9 +33,17 @@ public class PointAndShoot : Component
 	[Property]
 	public PrefabFile MuzzleFX { get; set; }
 
+	/// <summary>
+	/// If the FX should be disposed after the duration or only once nobody is nearby
+	/// </summary>
+	[Property]
+	public bool MuzzleFXLooping { get; set; } = false;
+
+	public GameObject MuzzleParticle { get; set; }
 	public TimeSince LastShot { get; set; } = 0f;
 	public UnitInfo ClosestEnemy { get; set; }
 	public UnitInfo UnitInfo { get; set; }
+	public bool IsShooting { get; set; } = false;
 
 	protected override void DrawGizmos()
 	{
@@ -86,6 +94,33 @@ public class PointAndShoot : Component
 		{
 			var goalRotation = Rotation.LookAt( ClosestEnemy.Transform.Position.WithZ( 0 ) - Transform.Position.WithZ( 0 ), Vector3.Up );
 			Transform.Rotation = RotateTowards( Transform.Rotation, goalRotation, RotatingSpeed * Time.Delta );
+
+			IsShooting = true;
+		}
+		else
+			IsShooting = false;
+
+		if ( MuzzleFXLooping )
+		{
+			if ( IsShooting )
+			{
+				Log.Info( IsShooting );
+				if ( MuzzleParticle == null )
+				{
+					MuzzleParticle = SceneUtility.Instantiate( SceneUtility.GetPrefabScene( MuzzleFX ) );
+
+					if ( MuzzleParticle != null )
+					{
+						MuzzleParticle.Transform.Position = Transform.World.PointToWorld( Muzzle );
+						MuzzleParticle.Transform.Rotation = Transform.Rotation;
+						MuzzleParticle.SetParent( GameObject );
+					}
+				}
+			}
+			else
+			{
+				MuzzleParticle?.Destroy();
+			}
 		}
 	}
 
@@ -103,7 +138,7 @@ public class PointAndShoot : Component
 			.Where( x => UnitInfo.EnemyUnitTypes.Contains( x.UnitType ) )
 			.Where( x => x.Transform.Position.Distance( Transform.Position ) <= MaxRange );
 
-		var closestEnemy = allEnemies.OrderBy( x => x.GameObject.Transform.Position.Distance( Transform.Position ) )
+		var closestEnemy = allEnemies.OrderBy( x => x.GameObject.Transform.Position.Distance( Transform.Position ) ) // TODO: Check line of sight!
 			.FirstOrDefault();
 
 		foreach ( var enemy in allEnemies )
@@ -130,7 +165,7 @@ public class PointAndShoot : Component
 			.Where( x => UnitInfo.EnemyUnitTypes.Contains( x.UnitType ) )
 			.Where( x => x.Transform.Position.Distance( Transform.Position ) <= MaxRange );
 
-		var closestEnemy = allEnemies.OrderBy( x => x.GameObject.Transform.Position.Distance( Transform.Position ) )
+		var closestEnemy = allEnemies.OrderBy( x => x.GameObject.Transform.Position.Distance( Transform.Position ) ) // TODO: Check line of sight!
 			.FirstOrDefault();
 
 		if ( closestEnemy != null )

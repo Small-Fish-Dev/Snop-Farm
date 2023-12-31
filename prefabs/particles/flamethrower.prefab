@@ -134,9 +134,9 @@
           "Constants": "1,0,0,0"
         },
         "SheetSequence": false,
-        "Space": "World",
+        "Space": "Local",
         "StartVelocity": {
-          "Constants": "1,0,0,0"
+          "Constants": "5,0,0,0"
         },
         "Stretch": {},
         "TimeScale": 1,
@@ -148,7 +148,7 @@
         "Burst": 0,
         "Delay": 0,
         "Duration": 1,
-        "Loop": false,
+        "Loop": true,
         "OnEdge": false,
         "Radius": 0,
         "Rate": 55,

@@ -57,6 +57,8 @@
         "MaxRange": 400,
         "Muzzle": "25.90001,0,38.2",
         "MuzzleFX": "prefabs/particles/flamethrower.prefab",
+        "MuzzleFXDuration": 1,
+        "MuzzleFXLooping": true,
         "RotatingSpeed": 90
       }
     ],
