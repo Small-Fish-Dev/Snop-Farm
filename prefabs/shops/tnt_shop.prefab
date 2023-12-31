@@ -1,0 +1,41 @@
+{
+  "RootObject": {
+    "Id": "63a34c29-98f9-43e2-94bd-5b1d40f19487",
+    "Name": "tnt_shop",
+    "Scale": "1.5,1.5,1.5",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "__enabled": true,
+        "BodyGroups": 18446744073709551615,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "assets/untitled_15.vmdl",
+        "RenderType": "On",
+        "Tint": "0.41297,0.47176,0.60891,0.52"
+      },
+      {
+        "__type": "Shop",
+        "__enabled": true,
+        "PrefabToGrab": "prefabs/throwables/dynamite.prefab",
+        "Price": 0
+      },
+      {
+        "__type": "BoxCollider",
+        "__enabled": true,
+        "Center": "0,0,25",
+        "IsTrigger": false,
+        "Scale": "50,50,50",
+        "Static": false,
+        "Surface": null
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": [
+    "polyrats.untitled_15"
+  ]
+}

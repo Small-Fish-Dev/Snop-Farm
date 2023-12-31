@@ -34,6 +34,40 @@
         "__type": "Grabbable",
         "__enabled": true,
         "Throwable": true
+      },
+      {
+        "__type": "UnitInfo",
+        "__enabled": true,
+        "DamageAmountAnimation": "",
+        "DeathAnimation": "",
+        "DeathSound": null,
+        "EnemyUnitTypes": [
+          "Slime",
+          "Turret",
+          "NPC",
+          "Player"
+        ],
+        "Health": 999,
+        "HealthAmountAnimation": "",
+        "HitAnimation": "",
+        "HurtAnimation": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
+        "HurtColor": "1,0,0,1",
+        "HurtScale": 1.5,
+        "HurtSound": null,
+        "Renderer": "75a50116-5cd9-4956-91c7-7cc06d4139cc",
+        "UnitType": "Item"
+      },
+      {
+        "__type": "ExplodeComponent",
+        "__enabled": true,
+        "Damage": 5,
+        "Range": 100,
+        "Timer": 4
       }
     ]
   },
