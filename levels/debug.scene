@@ -144,6 +144,13 @@
       "Position": "-86.3867,13.26038,1",
       "Enabled": true,
       "__Prefab": "prefabs/shops/smg_turret_shop.prefab"
+    },
+    {
+      "Id": "12d626d4-caea-416b-a1a8-35c207caf2d1",
+      "Name": "flamethrower",
+      "Position": "140.2324,-553.775,0",
+      "Enabled": true,
+      "__Prefab": "prefabs/units/turrets/flamethrower.prefab"
     }
   ],
   "SceneProperties": {

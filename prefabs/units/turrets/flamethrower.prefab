@@ -1,0 +1,130 @@
+{
+  "RootObject": {
+    "Id": "e76ee5af-e49c-4317-8244-7e0a7efab619",
+    "Name": "flamethrower",
+    "Enabled": true,
+    "Components": [
+      {
+        "__type": "ModelRenderer",
+        "__enabled": true,
+        "BodyGroups": 18446744073709551615,
+        "MaterialGroup": null,
+        "MaterialOverride": null,
+        "Model": "models/pistol.vmdl",
+        "RenderType": "On",
+        "Tint": "1,1,1,1"
+      },
+      {
+        "__type": "UnitInfo",
+        "__enabled": true,
+        "DamageAmountAnimation": "damage",
+        "DeathAnimation": "dead",
+        "DeathSound": null,
+        "EnemyUnitTypes": [
+          "Slime"
+        ],
+        "Health": 5,
+        "HealthAmountAnimation": "health",
+        "HitAnimation": "hit",
+        "HurtAnimation": [
+          {
+            "x": 0.5,
+            "y": 0.5
+          }
+        ],
+        "HurtColor": "1,0,0,1",
+        "HurtScale": 1.5,
+        "HurtSound": null,
+        "Renderer": "e76ee5af-e49c-4317-8244-7e0a7efab619",
+        "UnitType": "Turret"
+      },
+      {
+        "__type": "BoxCollider",
+        "__enabled": true,
+        "Center": "0,0,0",
+        "IsTrigger": false,
+        "Scale": "50,50,50",
+        "Static": false,
+        "Surface": null
+      },
+      {
+        "__type": "PointAndShoot",
+        "__enabled": true,
+        "AreaOfEffect": true,
+        "Damage": 0.2,
+        "DamageCone": 50,
+        "FiringRate": 0.1,
+        "MaxRange": 400,
+        "Muzzle": "25.90001,0,38.2",
+        "MuzzleFX": "prefabs/particles/flamethrower.prefab",
+        "RotatingSpeed": 90
+      }
+    ],
+    "Children": [
+      {
+        "Id": "203c5066-28ec-405c-8cab-9ca1b6594cbc",
+        "Name": "Object",
+        "Position": "-10.26068,7.880783,25.87915",
+        "Scale": "0.5,0.5,0.5",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__enabled": true,
+            "BodyGroups": 18446744073709551615,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/sbox_props/gas_cylinder_tall/gas_cylinder_tall.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "Id": "967ec26f-8a09-4353-9954-ab38c401dd91",
+        "Name": "Object (1)",
+        "Position": "-10.26068,-9.684334,25.87915",
+        "Scale": "0.5,0.5,0.5",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__enabled": true,
+            "BodyGroups": 18446744073709551615,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/sbox_props/gas_cylinder_tall/gas_cylinder_tall.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      },
+      {
+        "Id": "f0b343fc-a09c-4ff1-8b02-8dcab25c09af",
+        "Name": "Object (2)",
+        "Position": "-10.26068,-1.163521,25.87915",
+        "Scale": "0.5,0.5,0.5",
+        "Enabled": true,
+        "Components": [
+          {
+            "__type": "ModelRenderer",
+            "__enabled": true,
+            "BodyGroups": 18446744073709551615,
+            "MaterialGroup": null,
+            "MaterialOverride": null,
+            "Model": "models/sbox_props/gas_cylinder_tall/gas_cylinder_tall.vmdl",
+            "RenderType": "On",
+            "Tint": "1,1,1,1"
+          }
+        ]
+      }
+    ]
+  },
+  "ShowInMenu": false,
+  "MenuPath": null,
+  "MenuIcon": null,
+  "__references": [
+    "facepunch.gascylinder_tall",
+    "rifter.ctd_pistol"
+  ]
+}
