@@ -1,7 +1,7 @@
 {
   "RootObject": {
-    "Id": "e6c423be-fd5f-421e-974e-d25b319f0022",
-    "Name": "smg_turret",
+    "Id": "63a34c29-98f9-43e2-94bd-5b1d40f19487",
+    "Name": "pistol_turret_shop",
     "Enabled": true,
     "Components": [
       {
@@ -11,8 +11,14 @@
         "MaterialGroup": null,
         "MaterialOverride": null,
         "Model": "models/smg.vmdl",
-        "RenderType": "On",
-        "Tint": "1,1,1,1"
+        "RenderType": "Off",
+        "Tint": "0.41297,0.47176,0.60891,0.52"
+      },
+      {
+        "__type": "Shop",
+        "__enabled": true,
+        "PrefabToGrab": "prefabs/units/turrets/smg_turret.prefab",
+        "Price": 10
       },
       {
         "__type": "BoxCollider",

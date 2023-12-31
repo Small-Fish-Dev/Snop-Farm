@@ -11,7 +11,7 @@
         "MaterialGroup": null,
         "MaterialOverride": null,
         "Model": "models/pistol.vmdl",
-        "RenderType": "On",
+        "RenderType": "Off",
         "Tint": "0.41297,0.47176,0.60891,0.52"
       },
       {

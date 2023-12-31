@@ -53,8 +53,8 @@ public class UnitInfo : Component
 	{
 		base.OnStart();
 
-		base.Tags.Set( "Unit", true ); // Give the Unit tag
-		base.Tags.Set( UnitType.ToString(), true ); // Give tag of whatever unit type this is
+		GameObject.Tags.Set( "Unit", true ); // Give the Unit tag
+		GameObject.Tags.Set( UnitType.ToString(), true ); // Give tag of whatever unit type this is
 
 		MaxHealth = Health;
 		MaxScale = Transform.Scale;

@@ -1,8 +1,8 @@
 {
   "UI": false,
-  "Volume": "1.00,1.00,0",
-  "Pitch": "1.00,1.00,0",
-  "Decibels": 70,
+  "Volume": "0.40,0.50,1",
+  "Pitch": "0.70,1.00,1",
+  "Decibels": 50,
   "SelectionMode": "Random",
   "Sounds": [
     "sounds/splurge.vsnd"

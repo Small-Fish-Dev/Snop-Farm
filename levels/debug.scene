@@ -126,17 +126,24 @@
     {
       "Id": "3fc1eb07-90f2-4316-a262-3b616f657174",
       "Name": "pistol_turret_shop",
-      "Position": "-40.894,79.72769,0",
+      "Position": "-15.12527,81.08061,0.000001535936",
       "Enabled": true,
       "__Prefab": "prefabs/shops/pistol_turret_shop.prefab"
     },
     {
       "Id": "aba82277-c3a5-4d27-86a1-4590c6e52e75",
       "Name": "tnt_shop",
-      "Position": "70.69161,73.07204,10",
+      "Position": "81.2268,71.06888,10",
       "Scale": "1.5,1.5,1.5",
       "Enabled": true,
       "__Prefab": "prefabs/shops/tnt_shop.prefab"
+    },
+    {
+      "Id": "4e307b90-7a6e-461d-9382-4ba30f584787",
+      "Name": "pistol_turret_shop",
+      "Position": "-86.3867,13.26038,1",
+      "Enabled": true,
+      "__Prefab": "prefabs/shops/smg_turret_shop.prefab"
     }
   ],
   "SceneProperties": {
