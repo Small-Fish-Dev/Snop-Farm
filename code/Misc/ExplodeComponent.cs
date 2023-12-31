@@ -1,4 +1,5 @@
 using Sandbox;
+using Sandbox.VR;
 
 public class ExplodeComponent : Component
 {
@@ -51,6 +52,18 @@ public class ExplodeComponent : Component
 		TimeSinceActive += Time.Delta;
 
 		if ( TimeSinceActive >= Timer )
+		{
+			var enemyTagsArray = UnitInfo.EnemyUnitTypes
+				.Select( x => x.ToString() )
+				.ToArray();
+
+			var foundEnemies = Scene.GetAllComponents<UnitInfo>()
+				.Where( x => UnitInfo.EnemyUnitTypes.Contains( x.UnitType ) && x.Transform.Position.Distance( Transform.Position ) <= Range );
+
+			foreach ( var enemy in foundEnemies )
+				enemy.Damage( Damage );
+
 			GameObject.Destroy();
+		}
 	}
 }
