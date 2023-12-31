@@ -4,5 +4,6 @@ public enum UnitType : Int64
 	Player,
 	Slime,
 	Turret,
-	NPC
+	NPC,
+	Item
 }

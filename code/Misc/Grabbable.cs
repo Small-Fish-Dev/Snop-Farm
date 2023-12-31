@@ -29,8 +29,24 @@ public class Grabbable : Component
 
 		if ( Grabbed )
 		{
-			Transform.Position = Grabber.Transform.Position + Grabber.Transform.Rotation.Forward * 45f;
+			if ( Throwable )
+				Transform.Position = Grabber.Transform.Position + Grabber.Transform.Rotation.Forward * 25f + Grabber.Transform.Rotation.Up * 40f;
+			else
+				Transform.Position = Grabber.Transform.Position + Grabber.Transform.Rotation.Forward * 45f;
+
 			Transform.Rotation = Grabber.Transform.Rotation;
+
+			if ( Renderer != null )
+				Renderer.Tint = Renderer.Tint.WithAlpha( 0.5f );
+
+			if ( Collider != null )
+				Collider.Enabled = false;
+
+			if ( Rigidbody != null )
+				Rigidbody.Enabled = false;
+
+			if ( UnitInfo != null )
+				UnitInfo.Disabled = true;
 		}
 	}
 
@@ -66,8 +82,6 @@ public class Grabbable : Component
 	{
 		if ( Grabber != null )
 		{
-			Grabber = null;
-
 			if ( Renderer != null )
 				Renderer.Tint = Renderer.Tint.WithAlpha( 1f );
 
@@ -75,10 +89,17 @@ public class Grabbable : Component
 				Collider.Enabled = true;
 
 			if ( Rigidbody != null )
+			{
 				Rigidbody.Enabled = true;
+
+				if ( Throwable )
+					Rigidbody.ApplyForce( ( Grabber.Controller.EyeRotation.Forward * 60000f + Vector3.Up * 40000f ) * Rigidbody.PhysicsBody.Mass );
+			}
 
 			if ( UnitInfo != null )
 				UnitInfo.Disabled = false;
+
+			Grabber = null;
 
 			return true;
 		}
