@@ -15,6 +15,17 @@ public class ExplodeComponent : Component
 	[Property]
 	public float Timer { get; set; } = 4f;
 
+	[Property]
+	public Curve TickingAnimation { get; set; }
+
+	[Property]
+	public Color AnimationColor { get; set; } = Color.Red;
+
+	[Property]
+	public SoundEvent AnimationSound { get; set; }
+
+	public SoundHandle AnimationSFX { get; set; }
+
 	public ModelRenderer Renderer { get; set; }
 	public Collider Collider { get; set; }
 	public Rigidbody Rigidbody { get; set; }
@@ -41,6 +52,15 @@ public class ExplodeComponent : Component
 		Collider = GameObject.Components.Get<Collider>();
 		Rigidbody = GameObject.Components.Get<Rigidbody>();
 		UnitInfo = GameObject.Components.Get<UnitInfo>();
+
+		AnimationSFX = Sound.Play( AnimationSound, Transform.Position );
+	}
+
+	protected override void OnDestroy()
+	{
+		base.OnDestroy();
+
+		AnimationSFX.Stop();
 	}
 
 	protected override void OnFixedUpdate()
@@ -65,5 +85,21 @@ public class ExplodeComponent : Component
 
 			GameObject.Destroy();
 		}
+	}
+
+	protected override void OnUpdate()
+	{
+		base.OnUpdate();
+
+		if ( UnitInfo == null || UnitInfo.Disabled ) return;
+
+		if ( Renderer != null )
+			Renderer.Tint = Color.Lerp( Color.White, AnimationColor, TickingAnimation.EvaluateDelta( TimeSinceActive / Timer ) );
+
+		GameObject.Transform.Scale = 1 + TickingAnimation.EvaluateDelta( TimeSinceActive / Timer ) * 0.3f;
+
+		AnimationSFX.Position = Transform.Position;
+		AnimationSFX.Volume = TickingAnimation.EvaluateDelta( TimeSinceActive / Timer );
+
 	}
 }

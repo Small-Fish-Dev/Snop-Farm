@@ -65,8 +65,68 @@
       {
         "__type": "ExplodeComponent",
         "__enabled": true,
+        "AnimationColor": "1,0,0,1",
+        "AnimationSound": "sounds/high_pitch.sound",
         "Damage": 5,
         "Range": 200,
+        "TickingAnimation": {
+          "rangey": "0,3",
+          "frames": [
+            {
+              "mode": "Stepped"
+            },
+            {
+              "x": 0.0640394,
+              "y": 0.3333333,
+              "mode": "Stepped"
+            },
+            {
+              "x": 0.12561576,
+              "mode": "Stepped"
+            },
+            {
+              "x": 0.25246304,
+              "y": 0.3333333,
+              "mode": "Stepped"
+            },
+            {
+              "x": 0.3128079,
+              "mode": "Stepped"
+            },
+            {
+              "x": 0.43103445,
+              "y": 0.3333333,
+              "mode": "Stepped"
+            },
+            {
+              "x": 0.49384236,
+              "mode": "Stepped"
+            },
+            {
+              "x": 0.5726601,
+              "y": 0.3333333,
+              "mode": "Stepped"
+            },
+            {
+              "x": 0.64162564,
+              "mode": "Stepped"
+            },
+            {
+              "x": 0.6995074,
+              "y": 0.3333333,
+              "mode": "Stepped"
+            },
+            {
+              "x": 0.7623153
+            },
+            {
+              "x": 1,
+              "y": 1,
+              "in": 0.08000011,
+              "out": -0.08000011
+            }
+          ]
+        },
         "Timer": 4
       }
     ]
