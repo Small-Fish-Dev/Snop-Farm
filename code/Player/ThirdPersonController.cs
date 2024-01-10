@@ -19,7 +19,7 @@ public class ThirdPersonController : Component
 
 	[Range( 0f, 400f, 1f, true, true )]
 	[Property]
-	public float WalkSpeed { get; set;  } = 120f; // How fast we walk
+	public float WalkSpeed { get; set; } = 120f; // How fast we walk
 
 	[Range( 0f, 800f, 1f, true, true )]
 	[Property]
@@ -67,7 +67,7 @@ public class ThirdPersonController : Component
 
 			Camera.Transform.Position = EyeWorldPosition + (InitialCameraPosition - EyePosition) * eyeRotation; // Rotate camera around eyeposition relative to initial position
 
-			var traceDirection = (Camera.Transform.World.Position - EyeWorldPosition ).Normal;
+			var traceDirection = (Camera.Transform.World.Position - EyeWorldPosition).Normal;
 			var maxDistance = Vector3.DistanceBetween( EyePosition, InitialCameraPosition );
 			var cameraTrace = Scene.Trace.FromTo( EyeWorldPosition, EyeWorldPosition + traceDirection * maxDistance )
 				.Size( 5f )
@@ -91,7 +91,7 @@ public class ThirdPersonController : Component
 
 		var bodyHeadRotationDifference = Vector3.GetAngle( Transform.Rotation.Forward.WithZ( 0 ), EyeAngles.Forward.WithZ( 0 ) );
 
-		if ( ( MoveHelper != null && !MoveHelper.Velocity.IsNearlyZero( 1f ) ) || bodyHeadRotationDifference > 50f )
+		if ( (MoveHelper != null && !MoveHelper.Velocity.IsNearlyZero( 1f )) || bodyHeadRotationDifference > 50f )
 			Transform.Rotation = Rotation.Slerp( Transform.Rotation, Rotation.FromYaw( EyeAngles.yaw ), Time.Delta * 6f );
 
 		if ( CitizenAnimation != null )

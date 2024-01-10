@@ -87,12 +87,12 @@ public class MoveHelper : Component
 			draw.LineBBox( DefineBBox() );
 	}
 
-	private PhysicsTraceBuilder BuildTrace( Vector3 from, Vector3 to )
+	private SceneTrace BuildTrace( Vector3 from, Vector3 to )
 	{
-		return BuildTrace( base.Scene.PhysicsWorld.Trace.Ray( in from, in to ) );
+		return BuildTrace( base.Scene.Trace.Ray( in from, in to ) );
 	}
 
-	private PhysicsTraceBuilder BuildTrace( PhysicsTraceBuilder source )
+	private SceneTrace BuildTrace( SceneTrace source )
 	{
 		if ( IsCapsuleCollider )
 		{
@@ -145,7 +145,7 @@ public class MoveHelper : Component
 		}
 
 		to.z -= (isOnGround ? StepHeight : 0.1f);
-		PhysicsTraceResult physicsTraceResult = BuildTrace( from, to ).Run();
+		var physicsTraceResult = BuildTrace( from, to ).Run();
 
 		if ( !physicsTraceResult.Hit || Vector3.GetAngle( Vector3.Up, physicsTraceResult.Normal ) > GroundAngle )
 		{
@@ -267,7 +267,7 @@ public class MoveHelper : Component
 				Velocity = Velocity.WithZ( 0 ); // Nullify any vertical velocity to stick to the ground
 
 			Velocity = Velocity.WithAcceleration( WishVelocity, Acceleration );
-			Velocity = Velocity.WithFriction( GroundFriction * Time.Delta * ( fasterThanIntended ? 2f : 1f ) );
+			Velocity = Velocity.WithFriction( GroundFriction * Time.Delta * (fasterThanIntended ? 2f : 1f) );
 		}
 		else // If we're in air VVV
 		{
@@ -277,8 +277,8 @@ public class MoveHelper : Component
 			Velocity = Velocity.WithFriction( AirFriction * Time.Delta * (fasterThanIntended ? 2f : 1f) );
 		}
 
-		if ( Velocity.WithZ(0).Length > WishVelocity.WithZ(0).Length )
-			Velocity = ( Velocity.Normal * WishVelocity.Length ).WithZ( Velocity.z ); // TODO This sucks
+		if ( Velocity.WithZ( 0 ).Length > WishVelocity.WithZ( 0 ).Length )
+			Velocity = (Velocity.Normal * WishVelocity.Length).WithZ( Velocity.z ); // TODO This sucks
 
 		Move(); // Move our character
 	}

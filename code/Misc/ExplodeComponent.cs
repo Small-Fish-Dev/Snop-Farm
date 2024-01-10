@@ -1,6 +1,3 @@
-using Sandbox;
-using Sandbox.VR;
-
 public class ExplodeComponent : Component
 {
 	[Range( 0f, 100f, 0.1f )]
